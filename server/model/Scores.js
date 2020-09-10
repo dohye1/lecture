@@ -20,6 +20,18 @@ const scoreSchema = new mongoose.Schema({
     final_score: {
         type: Number,
         required: true
+    },
+    first_score: {
+        type: Number,
+        required: true
+    },
+    second_score: {
+        type: Number,
+        required: true
+    },
+    third_score: {
+        type: Number,
+        required: true
     }
 });
 
