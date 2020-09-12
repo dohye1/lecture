@@ -23,11 +23,11 @@ const classSchema = new mongoose.Schema({
         required: true
     },
     start_time: {
-        type: Date,
+        type: String,
         required: true
     },
     finish_time: {
-        type: Date,
+        type: String,
         required: true
     },
     std_max: {
