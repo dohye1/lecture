@@ -3,6 +3,7 @@ const routes = {
     register: '/register',
     login: '/login',
     logout: '/logout',
+    auth: '/auth',
     editProfile: '/profile/edit',
     apiClass: '/api/class',
     all: '/all',

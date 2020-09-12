@@ -46,10 +46,9 @@ export const postLogin = async (req, res) => {
 
 
 export const getLogout = async (req, res) => {
-    const { cookies: { x_auth } } = req;
+    const { user: { _id } } = req;
     try {
-        const userId = jwt.verify(x_auth, process.env.SECRET_TOKEN);
-        const user = await User.findByIdAndUpdate(userId, { token: '' });
+        const user = await User.findByIdAndUpdate({ _id }, { token: '' });
         if (user) {
             return res.status(200).json({ logout: true })
         }
@@ -63,3 +62,10 @@ export const getLogout = async (req, res) => {
 export const postEditProfile = (req, res) => {
     console.log(req);
 };
+
+export const getAuth = (req, res) => {
+    const { user: { _id, name, email, department, std_num, role } } = req;
+    return res.status(200).json({
+        _id, name, email, department, std_num, role
+    })
+}
