@@ -14,7 +14,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    std_num: {
+    id_num: {
         type: Number,
         unique: true
     },

@@ -6,8 +6,10 @@ const classRouter = express.Router();
 classRouter.get(routes.all, getAll);
 classRouter.get(routes.department, getDepartment);
 classRouter.get(routes.detail, getDetail);
-classRouter.post(routes.new, postNew);
-classRouter.post(routes.enroll, postEnroll);
 
+// 새로운 수업을 개설함
+classRouter.post(routes.new, postNew);
+
+classRouter.post(routes.enroll, postEnroll);
 
 export default classRouter;
