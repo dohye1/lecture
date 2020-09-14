@@ -50,7 +50,7 @@ export const getLogout = async (req, res) => {
     try {
         const user = await User.findByIdAndUpdate({ _id }, { token: '' });
         if (user) {
-            return res.status(200).json({ logout: true })
+            return res.clearCookie("x_auth").status(200).json({ logout: true })
         }
         return res.status(400).json({ logout: false })
     } catch (error) {
@@ -66,6 +66,6 @@ export const postEditProfile = (req, res) => {
 export const getAuth = (req, res) => {
     const { user: { _id, name, email, department, id_num, role } } = req;
     return res.status(200).json({
-        _id, name, email, department, id_num, role
+        _id, name, email, department, id_num, role, isAuth: true
     })
 }
