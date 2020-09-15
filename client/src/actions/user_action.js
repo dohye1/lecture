@@ -1,4 +1,4 @@
-import { AUTH_USER, LOGIN, LOGOUT } from './types';
+import { AUTH_USER, LOGIN, LOGOUT, REGISTER } from './types';
 
 export const auth = () => {
     return {
@@ -12,6 +12,15 @@ export const login = (email, password) => {
         payload: { email, password }
     }
 }
+
+export const register = (userInfo) => {
+    return {
+        type: REGISTER,
+        payload: userInfo
+    }
+}
+
+
 export const logout = () => {
     return {
         type: LOGOUT

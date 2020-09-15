@@ -1,5 +1,5 @@
 import { all, fork, put, call, takeEvery, takeLatest } from 'redux-saga/effects';
-import { AUTH_USER, AUTH_USER_RESULT, LOGIN, LOGIN_RESULT, LOGOUT, LOGOUT_RESULT } from '../actions/types';
+import { AUTH_USER, AUTH_USER_RESULT, LOGIN, LOGIN_RESULT, LOGOUT, LOGOUT_RESULT, REGISTER, REGISTER_RESULT } from '../actions/types';
 import axios from 'axios';
 
 //-------------logout----------------\
@@ -19,6 +19,25 @@ function* logout() {
     }
 }
 //-------------logout----------------
+
+
+//-------------register----------------
+let registerInfo;
+async function registerAPI() {
+    return await axios.post('/api/user/register', registerInfo).then(response => response.data);
+}
+
+function* register({ payload }) {
+    try {
+        registerInfo = payload;
+        const registerResult = yield call(registerAPI);
+        yield put({ type: REGISTER_RESULT, payload: registerResult })
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+//-------------register----------------
 
 
 //-------------login----------------
@@ -58,6 +77,7 @@ function* authUser() {
 function* watchUser() {
     yield takeEvery(AUTH_USER, authUser);
     yield takeLatest(LOGIN, login);
+    yield takeLatest(REGISTER, register);
     yield takeLatest(LOGOUT, logout);
 
 }

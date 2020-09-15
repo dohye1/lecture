@@ -21,13 +21,13 @@ $logoFam: 'Rubik', sans-serif;
     }
     .eng{
         font-family: #{$engFam};
-        font-size:15px;
-        font-weight: 400;
+        font-size:14px;
+        font-weight: 500;
     }
     .kor{
         font-family: #{$korfam};
-        font-size:15px;
-        font-weight: 400;
+        font-size:14px;
+        font-weight: 500;
     }
     .nav-menu{
         width:50%;
@@ -36,7 +36,7 @@ $logoFam: 'Rubik', sans-serif;
         line-height:70px;
         li a{
             margin-right:30px;
-            color:#454444;
+            color:#fafafa;
         }
         &_user li:first-child{
             margin-left:200px;

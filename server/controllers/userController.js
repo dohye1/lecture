@@ -6,15 +6,16 @@ import jwt from 'jsonwebtoken';
 dotenv.config();
 
 export const postRegister = async (req, res) => {
-    const { body: { name, email, department, id_num, password, role } } = req;
+    console.log(req);
+    const { body: { Name, Email, Department, IdNum, Password, Role } } = req;
     try {
         // db에 동일한 이메일, 학번이 있는지 체크
-        const userCheck = await User.findOne({ email, id_num });
+        const userCheck = await User.findOne({ Email, IdNum });
         if (userCheck !== null) { return res.status(400).json({ register: false, reason: 'email' }) }
         const salt = await bcrypt.genSalt(10);
-        const hash = await bcrypt.hash(password, salt);
+        const hash = await bcrypt.hash(Password, salt);
         const newUser = await User.create({
-            name, email, department, id_num, password: hash, role
+            name: Name, email: Email, department: Department, id_num: IdNum, password: hash, role: Role
         })
         if (newUser) {
             return res.status(200).json({ register: true })
@@ -30,7 +31,7 @@ export const postLogin = async (req, res) => {
     const { body: { email, password } } = req;
     try {
         const user = await User.findOne({ email });
-        if (!user) { return res.status(400).json({ login: false, reason: 'email' }) }
+        if (!user) { return res.status(400).json({ login: false }) }
         const result = await bcrypt.compare(password, user.password);
         if (result) {
             // 로그인성공했으면 jwt으로 토큰만들기
@@ -65,7 +66,8 @@ export const postEditProfile = (req, res) => {
 
 export const getAuth = (req, res) => {
     const { user: { _id, name, email, department, id_num, role } } = req;
+
     return res.status(200).json({
-        _id, name, email, department, id_num, role, isAuth: true
+        user: { id: _id, name, email, department, id_num, role }, isAuth: true
     })
 }

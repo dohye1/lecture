@@ -14,6 +14,7 @@ const routes = {
     apiDashboard: '/api/dashboard',
     professor: '/professor',
     student: '/student',
+    my: '/my'
 }
 
 export default routes;

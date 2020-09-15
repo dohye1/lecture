@@ -31,15 +31,15 @@ const Login = () => {
 
     useEffect(() => {
 
-    }, [EmailCss])
+    }, [EmailCss]);
     return (
         <div className="login-container">
             <h1>LOG IN</h1>
             <section className="login-form">
                 <form>
                     <div className="input-box">
-                        <input type="text" name="id" id="id" autoComplete="off" required onChange={(e) => setEmail(e.currentTarget.value)} />
-                        <label htmlFor="id" className={EmailCss}>EMAIL</label>
+                        <input type="text" name="email" id="email" autoComplete="off" required onChange={(e) => setEmail(e.currentTarget.value)} />
+                        <label htmlFor="email" className={EmailCss}>EMAIL</label>
                     </div>
                     <div className="input-box">
                         <input type="password" name="pw" id="pw" autoComplete="off" required onChange={(e) => setPassword(e.currentTarget.value)} />
@@ -50,8 +50,6 @@ const Login = () => {
                     </div>
                 </form>
                 <div className="caption">
-                    <p><Link to="/">Register</Link></p>
-                    <p>|</p>
                     <p><Link to="/">Forget Password?</Link></p>
                 </div>
             </section>
