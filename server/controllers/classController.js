@@ -1,7 +1,12 @@
 import Class from '../model/Class';
 
-export const getAll = (req, res) => {
-    console.log(req);
+export const getAll = async (req, res) => {
+    try {
+        const all = await Class.find();
+        return res.status(200).json({ allClass: true, all })
+    } catch (error) {
+        console.error(error);
+    }
 };
 
 export const getDepartment = (req, res) => {

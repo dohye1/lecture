@@ -5,11 +5,12 @@ import { register } from '../../../actions/user_action';
 
 import "./Register.scss";
 
-const Register = () => {
+const Register = (props) => {
     const dispatch = useDispatch();
+    const registerResult = useSelector(state => state.userReducer.register);
     const [Name, setName] = useState('');
     const [Email, setEmail] = useState('');
-    const [Department, setDepartment] = useState('');
+    const [Department, setDepartment] = useState(0);
     const [IdNum, setIdNum] = useState('');
     const [Password, setPassword] = useState('');
     const [ConfirmPassword, setConfirmPassword] = useState('');
@@ -48,11 +49,7 @@ const Register = () => {
             setTimeout(() =>
                 setConfirmPwCss(""), 1500);
         }
-        if (Department == 0) {
-            alert('소속대학을 선택하세요');
-            return;
-        }
-        if (Email !== '' && Password !== '' && Name !== '' && IdNum !== '' && ConfirmPassword !== '', Department !== '', Role !== '') {
+        if (Email !== '' && Password !== '' && Name !== '' && IdNum !== '' && ConfirmPassword !== '', Department !== 0, Role !== '') {
             dispatch(register({ Email, Password, Name, IdNum, ConfirmPassword, Department, Role }))
         }
     }
@@ -67,8 +64,10 @@ const Register = () => {
     }
 
     useEffect(() => {
-
-    }, [EmailCss]);
+        if (registerResult) {
+            props.history.push('/login')
+        }
+    }, [EmailCss, registerResult]);
 
     return (
         <div className="register-container">
@@ -116,8 +115,8 @@ const Register = () => {
                     </select>
 
                     <div className="radio-box">
-                        <input type="radio" id="role_stu" name="role" value="1" onClick={e => setRole(e.currentTarget.value)} />
-                        <label htmlFor="role_stu">STUDENT</label>
+                        <input type="radio" id="role_stu" name="role" value="1" onClick={e => setRole(e.currentTarget.value)} defaultChecked />
+                        <label htmlFor="role_stu" >STUDENT</label>
                         <input type="radio" id="role_pro" name="role" value="2" onClick={e => setRole(e.currentTarget.value)} />
                         <label htmlFor="role_pro">PROFESSOR</label>
                     </div>

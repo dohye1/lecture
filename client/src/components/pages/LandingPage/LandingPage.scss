@@ -1,0 +1,26 @@
+.landing-container{
+    width:70%;
+    background-color: peru;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    .landing-box{
+        width:70%;
+        background-color: orange;
+        padding:50px 100px;
+        .info{
+            width:100%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom:2vh;
+        }
+    }
+    .show-lectures{
+        width:100%;
+        display: flex;
+        justify-content: center;
+    }
+}

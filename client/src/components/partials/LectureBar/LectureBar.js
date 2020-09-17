@@ -3,7 +3,7 @@ import "./LectureBar.scss";
 
 const LectureBar = () => {
     return (
-        <div className="lectures-container">
+        <div className="lecture-container">
 
         </div>
 

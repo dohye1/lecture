@@ -22,6 +22,14 @@ const classSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    start_date: {
+        type: String,
+        required: true
+    },
+    finish_date: {
+        type: String,
+        required: true
+    },
     start_time: {
         type: String,
         required: true
@@ -40,7 +48,7 @@ const classSchema = new mongoose.Schema({
     },
     score_type: [{
         type: Number,
-        default: [1, 2]
+        default: [1]
     }],
     scores: [{
         type: mongoose.Schema.Types.ObjectId,

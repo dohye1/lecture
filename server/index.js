@@ -7,7 +7,7 @@ import cookieParser from 'cookie-parser';
 import routes from './routes';
 import userRouter from './routers/userRouter';
 import classRouter from './routers/classRouter';
-import dashboardRouter from './routers/dashboardRouter';
+import scoreRouter from './routers/scoreRouter';
 import "./db";
 
 dotenv.config();
@@ -22,6 +22,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(routes.apiUser, userRouter);
 app.use(routes.apiClass, classRouter);
-app.use(routes.apiDashboard, dashboardRouter);
+app.use(routes.apiScore, scoreRouter);
 
 app.listen(PORT, () => { console.log(`Listening on PORT : ${PORT}`) })

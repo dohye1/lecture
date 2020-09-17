@@ -21,8 +21,7 @@ const Nav = () => {
     const NavMenu = () => {
         return isAuth
             ? <ul className="nav-menu_user nav-menu">
-                <li><Link to="/" className="kor">ALL</Link></li>
-                <li><Link to="/" className="eng">MY</Link></li>
+                <li><Link to="/" className="kor">강의</Link></li>
                 <li><Link to="/" className="kor">성적관리</Link></li>
                 <li><Link to="/" className="eng">PROFILE</Link></li>
                 <li><Link to="/" className="eng" onClick={handleLogout}>LOGOUT</Link></li>

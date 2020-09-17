@@ -13,25 +13,20 @@ const scoreSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Class'
     }],
-    mid_score: {
-        type: Number,
-        required: true
-    },
-    final_score: {
-        type: Number,
-        required: true
-    },
     first_score: {
-        type: Number,
-        required: true
+        type: Number
     },
     second_score: {
-        type: Number,
-        required: true
+        type: Number
     },
     third_score: {
-        type: Number,
-        required: true
+        type: Number
+    },
+    fourth_score: {
+        type: Number
+    },
+    fifth_score: {
+        type: Number
     }
 });
 

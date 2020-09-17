@@ -6,7 +6,6 @@ import jwt from 'jsonwebtoken';
 dotenv.config();
 
 export const postRegister = async (req, res) => {
-    console.log(req);
     const { body: { Name, Email, Department, IdNum, Password, Role } } = req;
     try {
         // db에 동일한 이메일, 학번이 있는지 체크
@@ -15,12 +14,12 @@ export const postRegister = async (req, res) => {
         const salt = await bcrypt.genSalt(10);
         const hash = await bcrypt.hash(Password, salt);
         const newUser = await User.create({
-            name: Name, email: Email, department: Department, id_num: IdNum, password: hash, role: Role
+            name: Name, email: Email, department: Department, id_num: parseInt(IdNum), password: hash, role: parseInt(Role)
         })
         if (newUser) {
             return res.status(200).json({ register: true })
         } else {
-            return res.status(400).json({ register: false, reason: 'fail' })
+            return res.status(400).json({ register: false })
         }
     } catch (error) {
         console.log(error);

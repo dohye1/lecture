@@ -11,10 +11,7 @@ const routes = {
     new: '/new',
     detail: '/detail/:class-id',
     enroll: '/enroll',
-    apiDashboard: '/api/dashboard',
-    professor: '/professor',
-    student: '/student',
-    my: '/my'
+    apiScore: '/api/score'
 }
 
 export default routes;

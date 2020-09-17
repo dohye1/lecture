@@ -8,6 +8,7 @@ export const REGISTER_RESULT = 'register_result';
 export const LOGOUT = 'logout';
 export const LOGOUT_RESULT = 'logout_result';
 
-// Dashboard
-export const MY_DASHBOARD = 'my_dashboard';
-export const MY_DASHBOARD_RESULT = 'my_dashboard_result';
+
+//Class
+export const ALL_CLASS = "all_class";
+export const ALL_CLASS_RESULT = "all_class_result";

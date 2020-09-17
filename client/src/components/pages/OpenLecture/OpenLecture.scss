@@ -1,0 +1,72 @@
+$korfam : 'Noto Sans KR', sans-serif;
+$engFam : 'Roboto', sans-serif;
+$logoFam: 'Rubik', sans-serif;
+
+.open-container{
+    width:60%;
+    display: flex;
+    flex-direction: column;
+    justify-content:flex-start;
+    align-items: center;
+    margin-top:500px;
+    font-family: #{$korfam};
+    padding-bottom: 100px;
+    input{
+        border:none;
+        padding: 10px 2px;
+        border-bottom: 1px solid #9b9b9b;
+        outline:none;
+        width:100%;
+    }
+    h2{
+        font-size:30px;
+        font-weight: 600;
+        color:#526396;
+        margin-bottom: 30px;
+    }
+    .input-form{
+        width:50%;
+        display: flex;
+        flex-direction: column;
+        justify-content:center;
+        align-items: center;
+        
+         .short-box{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            width:100%;
+            .input-box{
+                width:40%;
+            }
+        }
+        .input-box{
+            width:100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            padding:20px 0;
+        }
+        .label-margin{
+            label{
+                margin:10px 0;
+            }
+        }
+        label{
+            font-size:16px;
+        }
+        textarea{
+            min-height:100px;
+            padding:20px;
+        }
+    }
+    .score-box{
+        width: 100% ;
+        margin-top:20px;
+        h3{
+            font-size:24px;
+            font-weight: 500;
+        }
+    }
+
+}
