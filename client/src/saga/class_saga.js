@@ -1,8 +1,30 @@
 import { all, fork, put, call, takeEvery, takeLatest } from 'redux-saga/effects';
-import { ALL_CLASS, ALL_CLASS_RESULT } from '../actions/types';
+import { ALL_CLASS, ALL_CLASS_RESULT, NEW_CLASS } from '../actions/types';
 import axios from 'axios';
 
-//-------------allClass----------------\
+
+//-------------newClass----------------
+let lectureData;
+async function newClassAPI() {
+    return await axios.post('/api/class/new', lectureData).then(response => response.data);
+}
+
+function* newClass({ payload }) {
+    lectureData = payload;
+    try {
+        const result = yield call(newClassAPI);
+        yield put({
+            type: ALL_CLASS_RESULT,
+            payload: result
+        })
+    } catch (error) {
+        console.log(error)
+    }
+}
+//-------------newClass----------------
+
+
+//-------------allClass----------------
 async function allClassAPI() {
     return await axios.get('/api/class/all').then(response => response.data);
 }
@@ -23,6 +45,7 @@ function* allClass() {
 
 function* watchClass() {
     yield takeEvery(ALL_CLASS, allClass);
+    yield takeEvery(NEW_CLASS, newClass)
 
 }
 

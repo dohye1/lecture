@@ -19,21 +19,26 @@ export const getDetail = (req, res) => {
 
 export const postNew = async (req, res) => {
     // 교수정보
-    const { user: { _id, department }, body: { title, room, startTime, finishTime, stdMax, description, scoreType } } = req;
+    const { user: { _id, department, name }, body: { title, room, date, time, maxNum, description, scoreArr, scoreText } } = req;
     try {
+        let scoreTitle = [];
+        scoreArr.map((item, index) => { if (item) { scoreTitle = [...scoreTitle, scoreText[index]] } })
         const newClass = await Class.create({
             professor_id: _id,
+            professor_name: name,
             class_title: title,
             class_department: department,
             class_room: room,
-            start_time: startTime,
-            finish_time: finishTime,
-            std_max: stdMax,
+            start_date: date[0],
+            end_date: date[1],
+            start_time: time[0],
+            end_time: time[1],
+            std_max: maxNum,
             description: description,
-            score_type: scoreType
+            score_title: scoreTitle
         })
-        if (!newClass) { return res.status(200).json({ newClass: false }) };
-        return res.status(200).json(newClass);
+        if (!newClass) { return res.status(200).json({ newLecture: false }) };
+        return res.status(200).json({ newLecture: true, lectureData: newClass });
     } catch (error) {
         console.error(error);
     }

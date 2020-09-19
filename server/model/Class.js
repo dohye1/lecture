@@ -6,6 +6,10 @@ const classSchema = new mongoose.Schema({
         ref: 'user',
         required: true
     },
+    professor_name: {
+        type: String,
+        required: true
+    },
     students: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'user'
@@ -26,7 +30,7 @@ const classSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    finish_date: {
+    end_date: {
         type: String,
         required: true
     },
@@ -34,7 +38,7 @@ const classSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    finish_time: {
+    end_time: {
         type: String,
         required: true
     },
@@ -46,18 +50,17 @@ const classSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    score_type: [{
-        type: Number,
-        default: [1]
+    score_title: [{
+        type: String
     }],
     scores: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Score'
     }],
     isFinished: {
-        type: Number,
+        type: Boolean,
         required: true,
-        default: 1
+        default: false
     }
 });
 

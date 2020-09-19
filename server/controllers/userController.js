@@ -7,6 +7,8 @@ dotenv.config();
 
 export const postRegister = async (req, res) => {
     const { body: { Name, Email, Department, IdNum, Password, Role } } = req;
+    const departmentArr = ["소속대학", "인문대학", "사회과학대학", "자연과학대학", "경상대학", "법과대학", "공과대학", "농업생명과학대학", "사범대학", "예술대학", "치과대학", "수의과대학",
+        "생활과학대학", "IT대학", "약학대학", "행정학부"];
     try {
         // db에 동일한 이메일, 학번이 있는지 체크
         const userCheck = await User.findOne({ Email, IdNum });
@@ -14,7 +16,7 @@ export const postRegister = async (req, res) => {
         const salt = await bcrypt.genSalt(10);
         const hash = await bcrypt.hash(Password, salt);
         const newUser = await User.create({
-            name: Name, email: Email, department: Department, id_num: parseInt(IdNum), password: hash, role: parseInt(Role)
+            name: Name, email: Email, department: departmentArr[parseInt(Department)], id_num: parseInt(IdNum), password: hash, role: parseInt(Role)
         })
         if (newUser) {
             return res.status(200).json({ register: true })
