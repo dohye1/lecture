@@ -1,0 +1,20 @@
+{
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "extends": ["react-app", "google"],
+  "env": {
+    "browser": true
+  },
+  "rules": {
+    "new-cap": "off",
+    "camelcase": "off",
+    "indent": ["error", 4],
+    "require-jsdoc": "off",
+    "max-len": ["error", 100]
+  }
+}

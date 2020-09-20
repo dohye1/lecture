@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import { TimePicker, DatePicker, Space } from 'antd';
-import "./OpenLecture.scss";
 import { newClass } from '../../../actions/class_action';
+
+import './styles.scss';
 
 const OpenLecture = () => {
     const dispatch = useDispatch();
@@ -14,16 +15,16 @@ const OpenLecture = () => {
     const [Time, setTime] = useState();
 
     const ScoreBoard = () => {
-        return (
-            ScoreBox.map((item, index) => item && <Box index={index} key={index} />)
-        )
-    }
+        return ScoreBox.map(
+            (item, index) => item && <Box index={index} key={index} />,
+        );
+    };
 
     const handleChange = (e) => {
         let boxText = BoxText;
         boxText[e.target.id] = e.target.value;
         setBoxText([...boxText]);
-    }
+    };
 
     const clickDeleteScoreBoard = (e) => {
         if (CountBox == 1) {
@@ -34,25 +35,40 @@ const OpenLecture = () => {
         let arr = ScoreBox;
         arr[e.target.id] = false;
         setScoreBox([...arr]);
-    }
+    };
 
-    // 문제 
+    // 문제
     // 1. 영어입력에는 문제가 없는데 한글로 입력하면 문제발생
     // 2. 맨 마지막 input에 focus가 잡힘
     const Box = ({ index }) => {
-        return <div className="score-box-each">
-            <div className="score-input-box">
-                <label htmlFor="item">평가 항목</label>
-                <input type="text" id={index} name="item" autoFocus value={BoxText[index]} onChange={handleChange} />
+        return (
+            <div className="score-box-each">
+                <div className="score-input-box">
+                    <label htmlFor="item">평가 항목</label>
+                    <input
+                        type="text"
+                        id={index}
+                        name="item"
+                        autoFocus
+                        value={BoxText[index]}
+                        onChange={handleChange}
+                    />
+                </div>
+                <button
+                    type="button"
+                    id={index}
+                    onClick={clickDeleteScoreBoard}
+                >
+                    평가항목 삭제하기
+                </button>
             </div>
-            <button type="button" id={index} onClick={clickDeleteScoreBoard}>평가항목 삭제하기</button>
-        </div>
-    }
+        );
+    };
 
     const clickAddScoreBoard = () => {
         setCountBox(CountBox + 1);
-        setScoreBox([...ScoreBox, true])
-    }
+        setScoreBox([...ScoreBox, true]);
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -64,17 +80,17 @@ const OpenLecture = () => {
             time: Time,
             description: e.target.description.value,
             scoreArr: ScoreBox,
-            scoreText: BoxText
-        }
+            scoreText: BoxText,
+        };
 
-        dispatch(newClass(lectureData))
-    }
+        dispatch(newClass(lectureData));
+    };
 
     useEffect(() => {
-        console.log('몇개있어?', CountBox)
+        console.log('몇개있어?', CountBox);
         console.log(ScoreBox);
         console.log(BoxText);
-    }, [ScoreBox, BoxText])
+    }, [ScoreBox, BoxText]);
 
     return (
         <div className="open-container">
@@ -82,26 +98,50 @@ const OpenLecture = () => {
             <form className="input-form" onSubmit={handleSubmit}>
                 <div className="input-box">
                     <label htmlFor="title">강의명</label>
-                    <input type="text" id="title" name="title" autoComplete="off" required />
+                    <input
+                        type="text"
+                        id="title"
+                        name="title"
+                        autoComplete="off"
+                        required
+                    />
                 </div>
                 <div className="short-box">
                     <div className="input-box">
                         <label htmlFor="room">강의실</label>
-                        <input type="text" id="room" name="room" autoComplete="off" required />
+                        <input
+                            type="text"
+                            id="room"
+                            name="room"
+                            autoComplete="off"
+                            required
+                        />
                     </div>
                     <div className="input-box">
                         <label htmlFor="maxNum">수강인원</label>
-                        <input type="text" id="maxNum" name="maxNum" autoComplete="off" required />
+                        <input
+                            type="text"
+                            id="maxNum"
+                            name="maxNum"
+                            autoComplete="off"
+                            required
+                        />
                     </div>
                 </div>
 
                 <div className="input-box label-margin">
-                    <label htmlFor="title" >개강, 종강 날짜</label>
-                    < DatePicker.RangePicker onChange={(_, date) => setDate(date)} format="YYYY/MM/DD" />
+                    <label htmlFor="title">개강, 종강 날짜</label>
+                    <DatePicker.RangePicker
+                        onChange={(_, date) => setDate(date)}
+                        format="YYYY/MM/DD"
+                    />
                 </div>
                 <div className="input-box label-margin">
                     <label htmlFor="title">강의 시간</label>
-                    <TimePicker.RangePicker onChange={(_, time) => setTime(time)} format="HH:mm" />
+                    <TimePicker.RangePicker
+                        onChange={(_, time) => setTime(time)}
+                        format="HH:mm"
+                    />
                 </div>
 
                 <div className="input-box label-margin">
@@ -110,18 +150,27 @@ const OpenLecture = () => {
                 </div>
                 <div className="score-box">
                     <h3>수료기준 설정</h3>
-                    <p>평가 항목을 설정해 주세요  ( ex ) midterm, finalterm, test... )<br />
-                    평가 항목은 최소 1개를 설정해야 합니다</p>
+                    <p>
+                        평가 항목을 설정해 주세요 ( ex ) midterm, finalterm,
+                        test... )<br />
+                        평가 항목은 최소 1개를 설정해야 합니다
+                    </p>
                     <ScoreBoard />
-                    {CountBox > 4 ? <div></div> : <button type="button" onClick={clickAddScoreBoard}>평가항목 추가하기</button>}
+                    {CountBox > 4 ? (
+                        <div></div>
+                    ) : (
+                        <button type="button" onClick={clickAddScoreBoard}>
+                            평가항목 추가하기
+                        </button>
+                    )}
                 </div>
                 <div className="btn-box">
                     <button type="reset">뒤로가기</button>
                     <button type="submit">개설하기</button>
                 </div>
             </form>
-        </div >
-    )
-}
+        </div>
+    );
+};
 
 export default withRouter(OpenLecture);

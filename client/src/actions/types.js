@@ -8,9 +8,10 @@ export const REGISTER_RESULT = 'register_result';
 export const LOGOUT = 'logout';
 export const LOGOUT_RESULT = 'logout_result';
 
-
 //Class
-export const ALL_CLASS = "all_class";
-export const ALL_CLASS_RESULT = "all_class_result";
+export const ALL_CLASS = 'all_class';
+export const ALL_CLASS_RESULT = 'all_class_result';
 export const NEW_CLASS = 'new_class';
-export const NEW_CLASS_RESULT = 'new_class_result'
+export const NEW_CLASS_RESULT = 'new_class_result';
+export const ENROLL_CLASS = 'enroll_class';
+export const ENROLL_CLASS_RESULT = 'enroll_class_result';
