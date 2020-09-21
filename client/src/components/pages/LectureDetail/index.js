@@ -9,6 +9,7 @@ import './styles.scss';
 const LectureDetail = (props) => {
     const dispatch = useDispatch();
     const lectures = useSelector((state) => state.classReducer.class);
+    const role = useSelector((state) => state.userReducer.role);
     const enrollResult = useSelector(
         (state) => state.classReducer.enrollResult,
     );
@@ -19,9 +20,16 @@ const LectureDetail = (props) => {
         e.preventDefault();
         dispatch(enrollClass({ lectureId: lectureId }));
     };
-
+    const EnrollBtn = () => {
+        return props.user && props.user.role == 2 ? (
+            <></>
+        ) : (
+            <button type="button" onClick={handleApply}>
+                신청하기
+            </button>
+        );
+    };
     useEffect(() => {
-        console.log(enrollClass);
         if (enrollResult) {
             props.history.push('/');
         }
@@ -33,7 +41,7 @@ const LectureDetail = (props) => {
                 }
             });
         }
-    }, [lectures, enrollResult]);
+    }, [lectures, enrollResult, role]);
 
     return (
         <div className="lecture-detail-container">
@@ -74,9 +82,7 @@ const LectureDetail = (props) => {
                 <button type="button">
                     <Link to="/">뒤로가기</Link>
                 </button>
-                <button type="button" onClick={handleApply}>
-                    신청하기
-                </button>
+                <EnrollBtn />
             </div>
         </div>
     );
