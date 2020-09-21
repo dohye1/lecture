@@ -1,0 +1,21 @@
+$korfam: 'Noto Sans KR', sans-serif;
+.score-container {
+    width: 60%;
+    margin-top: 9vh;
+    display: flex;
+    font-family: #{$korfam};
+    .show-score-box {
+        width: 80%;
+        background-color: red;
+    }
+    section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        h1 {
+            font-weight: 700;
+            font-size: 18px;
+            margin-top: 15px;
+        }
+    }
+}

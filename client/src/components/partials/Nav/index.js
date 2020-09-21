@@ -27,7 +27,7 @@ const Nav = () => {
                     </Link>
                 </li>
                 <li>
-                    <Link to="/" className="kor">
+                    <Link to="/score" className="kor">
                         성적관리
                     </Link>
                 </li>

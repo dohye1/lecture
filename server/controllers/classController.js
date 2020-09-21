@@ -1,23 +1,5 @@
 import Class from '../model/Class';
-
-const departmentArr = [
-  '소속대학',
-  '인문대학',
-  '사회과학대학',
-  '자연과학대학',
-  '경상대학',
-  '법과대학',
-  '공과대학',
-  '농업생명과학대학',
-  '사범대학',
-  '예술대학',
-  '치과대학',
-  '수의과대학',
-  '생활과학대학',
-  'IT대학',
-  '약학대학',
-  '행정학부'
-];
+import User from '../model/User';
 
 export const getAll = async (req, res) => {
   try {
@@ -78,11 +60,18 @@ export const postEnroll = async (req, res) => {
     body: { lectureId }
   } = req;
   try {
-    const enrollResult = await Class.findByIdAndUpdate(
+    const enrollClassResult = await Class.findByIdAndUpdate(
       { _id: lectureId },
       { $addToSet: { students: [_id] } }
     );
-    if (!enrollResult) {
+    if (!enrollClassResult) {
+      return res.status(200).json({ enrollResult: false });
+    }
+    const enrollUserResult = await User.findByIdAndUpdate(
+      { _id },
+      { $addToSet: { classes: [enrollClassResult._id] } }
+    );
+    if (!enrollUserResult) {
       return res.status(200).json({ enrollResult: false });
     }
     return res.status(200).json({ enrollResult: true });

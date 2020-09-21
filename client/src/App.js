@@ -7,6 +7,7 @@ import Login from './components/pages/Login';
 import Register from './components/pages/Register';
 import OpenLecture from './components/pages/OpenLecture';
 import LectureDetail from './components/pages/LectureDetail';
+import ScorePage from './components/pages/ScorePage';
 
 import withAuth from './hoc/withAuth';
 
@@ -33,6 +34,10 @@ function App() {
                     <Route
                         path="/lecture/:id"
                         component={withAuth(LectureDetail, true)}
+                    />
+                    <Route
+                        path="/score"
+                        component={withAuth(ScorePage, true)}
                     />
                 </Switch>
             </div>

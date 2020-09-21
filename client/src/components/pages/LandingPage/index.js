@@ -8,7 +8,7 @@ import { PlusCircleOutlined } from '@ant-design/icons';
 
 import './styles.scss';
 const departmentArr = [
-    '소속대학',
+    'ALL',
     '인문대학',
     '사회과학대학',
     '자연과학대학',
@@ -29,6 +29,7 @@ const LandingPage = ({ user }) => {
     const dispatch = useDispatch();
     const [IsFirst, setIsFirst] = useState(true);
     const [SelectedLecutres, setSelectedLecutres] = useState([]);
+    const [Department, setDepartment] = useState('ALL');
     const lectures = useSelector((state) => state.classReducer.class);
     let selectedLecutres;
 
@@ -47,6 +48,7 @@ const LandingPage = ({ user }) => {
 
     const changeDepartment = (e) => {
         e.preventDefault();
+        setDepartment(departmentArr[e.target.value]);
         selectedLecutres =
             lectures &&
             lectures.filter((lecture) => {
@@ -79,7 +81,7 @@ const LandingPage = ({ user }) => {
             <MiniProfile />
             <div className="landing-box">
                 <div className="info">
-                    <h2>ALL</h2>
+                    <h2>{Department}</h2>
                     <div className="lecture-menu">
                         {user && user.role === 2 ? (
                             <div className="add-lecture">
