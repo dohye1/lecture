@@ -7,23 +7,67 @@ import { allClass } from '../../../actions/class_action';
 import { PlusCircleOutlined } from '@ant-design/icons';
 
 import './styles.scss';
-
+const departmentArr = [
+    '소속대학',
+    '인문대학',
+    '사회과학대학',
+    '자연과학대학',
+    '경상대학',
+    '법과대학',
+    '공과대학',
+    '농업생명과학대학',
+    '사범대학',
+    '예술대학',
+    '치과대학',
+    '수의과대학',
+    '생활과학대학',
+    'IT대학',
+    '약학대학',
+    '행정학부',
+];
 const LandingPage = ({ user }) => {
     const dispatch = useDispatch();
-    const [Department, setDepartment] = useState(0);
+    const [IsFirst, setIsFirst] = useState(true);
+    const [SelectedLecutres, setSelectedLecutres] = useState([]);
     const lectures = useSelector((state) => state.classReducer.class);
+    let selectedLecutres;
 
     useEffect(() => {
         if (lectures === undefined) {
             dispatch(allClass());
+        } else {
+            if (IsFirst) initializeDepartment();
         }
-    }, [lectures]);
+    }, [lectures, SelectedLecutres]);
+
+    const initializeDepartment = () => {
+        setSelectedLecutres(lectures);
+        setIsFirst(false);
+    };
+
+    const changeDepartment = (e) => {
+        e.preventDefault();
+        selectedLecutres =
+            lectures &&
+            lectures.filter((lecture) => {
+                if (e.target.value != 0) {
+                    return (
+                        lecture.class_department ===
+                        departmentArr[e.target.value]
+                    );
+                } else {
+                    return true;
+                }
+            });
+
+        setSelectedLecutres(selectedLecutres);
+    };
 
     const ShowLectures = () => {
         return (
             <div className="show-lectures">
-                {lectures &&
-                    lectures.map((lecture, index) => (
+                {SelectedLecutres &&
+                    SelectedLecutres.map((lecture, index) => (
                         <LectureBar lecture={lecture} key={lecture._id} />
                     ))}
             </div>
@@ -50,9 +94,7 @@ const LandingPage = ({ user }) => {
                         <select
                             name="department"
                             className="select-box"
-                            onChange={(e) =>
-                                setDepartment(e.currentTarget.value)
-                            }
+                            onChange={changeDepartment}
                         >
                             <option value="0">전체대학</option>
                             <option value="1">인문대학</option>
@@ -74,7 +116,7 @@ const LandingPage = ({ user }) => {
                     </div>
                 </div>
 
-                {lectures !== undefined ? (
+                {SelectedLecutres ? (
                     <ShowLectures />
                 ) : (
                     <div>개설된 강의가 없습니다</div>

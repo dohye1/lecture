@@ -1,5 +1,24 @@
 import Class from '../model/Class';
 
+const departmentArr = [
+  '소속대학',
+  '인문대학',
+  '사회과학대학',
+  '자연과학대학',
+  '경상대학',
+  '법과대학',
+  '공과대학',
+  '농업생명과학대학',
+  '사범대학',
+  '예술대학',
+  '치과대학',
+  '수의과대학',
+  '생활과학대학',
+  'IT대학',
+  '약학대학',
+  '행정학부'
+];
+
 export const getAll = async (req, res) => {
   try {
     const all = await Class.find();
