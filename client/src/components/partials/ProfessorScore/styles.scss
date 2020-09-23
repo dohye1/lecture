@@ -1,0 +1,80 @@
+$korfam: 'Noto Sans KR', sans-serif;
+$engFam: 'Roboto', sans-serif;
+
+.hide {
+    display: none;
+}
+
+.pro-score-container {
+    width: 90%;
+    .title {
+        margin-left: 1vh;
+        p {
+            font-size: 25px;
+            font-weight: 500;
+            margin-bottom: 2vh;
+        }
+        span {
+            font-size: 12px;
+        }
+    }
+    .input-score {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 30px 20px;
+        box-sizing: border-box;
+        border: 2px solid #acacac;
+        .std-info {
+            width: 90%;
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-end;
+            font-size: 13px;
+            font-family: #{$korfam};
+            .name {
+                font-size: 20px;
+                font-weight: 600;
+                line-height: 13px;
+                margin-right: 0.5rem;
+            }
+        }
+        form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            .input-box {
+                width: 70%;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin: 10px 0;
+                label {
+                    font-size: 15px;
+                }
+                input {
+                    border: none;
+                    outline: none;
+                    border-bottom: 1px solid #8e8e8e;
+                    padding: 7px 3px;
+                }
+            }
+            button {
+                width: 9vw;
+                height: 4vh;
+                border: none;
+                background-color: #848fb1;
+                color: white;
+                margin-top: 2vh;
+                cursor: pointer;
+                transition: all 0.5s ease;
+                &:hover {
+                    background-color: #5b678a;
+                }
+            }
+        }
+    }
+}

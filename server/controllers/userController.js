@@ -100,11 +100,11 @@ export const postEditProfile = (req, res) => {
 
 export const getAuth = (req, res) => {
   const {
-    user: { _id, name, email, department, id_num, role }
+    user: { _id, name, email, department, id_num, role, classes }
   } = req;
 
   return res.status(200).json({
-    user: { id: _id, name, email, department, id_num, role },
+    user: { id: _id, name, email, department, id_num, role, classes },
     isAuth: true
   });
 };

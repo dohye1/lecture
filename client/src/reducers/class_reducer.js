@@ -1,3 +1,4 @@
+import { contentSecurityPolicy } from 'helmet';
 import {
     ALL_CLASS_RESULT,
     NEW_CLASS_RESULT,
@@ -14,10 +15,11 @@ const classReducer = (state = {}, action) => {
         case NEW_CLASS_RESULT:
             return {
                 newClassResult: action.payload.newLecture,
-                lectureData: action.payload.lectureData,
             };
         case ENROLL_CLASS_RESULT:
-            return { enrollResult: action.payload.enrollResult };
+            return {
+                enrollResult: action.payload.enrollResult,
+            };
         default:
             return state;
     }

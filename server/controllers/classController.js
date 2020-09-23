@@ -3,19 +3,11 @@ import User from '../model/User';
 
 export const getAll = async (req, res) => {
   try {
-    const all = await Class.find();
+    const all = await Class.find().populate('students');
     return res.status(200).json({ allClass: true, all });
   } catch (error) {
     console.error(error);
   }
-};
-
-export const getDepartment = (req, res) => {
-  console.log(req);
-};
-
-export const getDetail = (req, res) => {
-  console.log(req);
 };
 
 export const postNew = async (req, res) => {
@@ -48,7 +40,14 @@ export const postNew = async (req, res) => {
     if (!newClass) {
       return res.status(200).json({ newLecture: false });
     }
-    return res.status(200).json({ newLecture: true, lectureData: newClass });
+    const proResult = await User.findByIdAndUpdate(
+      { _id },
+      { $addToSet: { classes: [newClass._id] } }
+    );
+    if (!proResult) {
+      return res.status(200).json({ newLecture: false });
+    }
+    return res.status(200).json({ newLecture: true });
   } catch (error) {
     console.error(error);
   }

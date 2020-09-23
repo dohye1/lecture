@@ -10,6 +10,7 @@ import {
     ALL_CLASS,
     ALL_CLASS_RESULT,
     NEW_CLASS,
+    NEW_CLASS_RESULT,
     ENROLL_CLASS,
     ENROLL_CLASS_RESULT,
 } from '../actions/types';
@@ -50,7 +51,7 @@ function* newClass({ payload }) {
     try {
         const result = yield call(newClassAPI);
         yield put({
-            type: ALL_CLASS_RESULT,
+            type: NEW_CLASS_RESULT,
             payload: result,
         });
     } catch (error) {

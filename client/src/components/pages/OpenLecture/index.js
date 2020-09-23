@@ -6,14 +6,16 @@ import { newClass } from '../../../actions/class_action';
 
 import './styles.scss';
 
-const OpenLecture = () => {
+const OpenLecture = (props) => {
     const dispatch = useDispatch();
     const [CountBox, setCountBox] = useState(1);
     const [ScoreBox, setScoreBox] = useState([true]);
     const [BoxText, setBoxText] = useState(['']);
     const [Date, setDate] = useState();
     const [Time, setTime] = useState();
-
+    const newClassResult = useSelector(
+        (state) => state.classReducer.newClassResult,
+    );
     const ScoreBoard = () => {
         return ScoreBox.map(
             (item, index) => item && <Box index={index} key={index} />,
@@ -87,10 +89,10 @@ const OpenLecture = () => {
     };
 
     useEffect(() => {
-        console.log('몇개있어?', CountBox);
-        console.log(ScoreBox);
-        console.log(BoxText);
-    }, [ScoreBox, BoxText]);
+        if (newClassResult) {
+            props.history.push('/');
+        }
+    }, [ScoreBox, BoxText, newClassResult]);
 
     return (
         <div className="open-container">

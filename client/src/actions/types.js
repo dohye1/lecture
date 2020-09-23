@@ -15,3 +15,7 @@ export const NEW_CLASS = 'new_class';
 export const NEW_CLASS_RESULT = 'new_class_result';
 export const ENROLL_CLASS = 'enroll_class';
 export const ENROLL_CLASS_RESULT = 'enroll_class_result';
+
+//Score
+export const EVALUATE_SCORE = 'evaluate_score';
+export const EVALUATE_SCORE_RESULT = 'evaluate_score_result';

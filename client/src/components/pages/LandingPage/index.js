@@ -31,15 +31,22 @@ const LandingPage = ({ user }) => {
     const [SelectedLecutres, setSelectedLecutres] = useState([]);
     const [Department, setDepartment] = useState('ALL');
     const lectures = useSelector((state) => state.classReducer.class);
+    const newClassResult = useSelector(
+        (state) => state.classReducer.newClassResult,
+    );
+    const enrollResult = useSelector(
+        (state) => state.classReducer.enrollResult,
+    );
+
     let selectedLecutres;
 
     useEffect(() => {
-        if (lectures === undefined) {
+        if (lectures === undefined || newClassResult || enrollResult) {
             dispatch(allClass());
         } else {
             if (IsFirst) initializeDepartment();
         }
-    }, [lectures, SelectedLecutres]);
+    }, [lectures, SelectedLecutres, newClassResult, enrollResult]);
 
     const initializeDepartment = () => {
         setSelectedLecutres(lectures);
