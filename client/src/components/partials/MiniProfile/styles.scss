@@ -1,15 +1,16 @@
 $korfam: 'Noto Sans KR', sans-serif;
 .mini-container {
-    width: 300px;
+    width: 13vw;
     height: 200px;
-    background-color: rgb(230, 230, 230);
+    background-color: #dadada;
+    border-radius: 5px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     font-style: #{$korfam};
     h3 {
-        font-size: 16px;
+        font-size: 17px;
         span {
             font-size: 13px;
         }

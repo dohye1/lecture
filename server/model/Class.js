@@ -44,6 +44,10 @@ const classSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  std_count: {
+    type: Number,
+    default: 0
+  },
   std_max: {
     type: Number,
     required: true

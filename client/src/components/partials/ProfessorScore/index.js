@@ -11,20 +11,29 @@ const ProfessorScore = ({ lecture }) => {
     console.log(lecture);
     const submitScore = (e) => {
         e.preventDefault();
-
+        console.log(e.target.parentNode.children);
         const scoreData = {
             classId: lecture[0]._id,
-            stdId: e.target.parentNode.children[3].innerText,
+            stdId: e.target.parentNode.children[1].innerText,
             score0: e.target.score0 ? e.target.score0.value : -1,
             score1: e.target.score1 ? e.target.score1.value : -1,
             score2: e.target.score2 ? e.target.score2.value : -1,
             score3: e.target.score3 ? e.target.score3.value : -1,
             score4: e.target.score4 ? e.target.score4.value : -1,
         };
-
         dispatch(evaluateScore(scoreData));
     };
-    const InputScoreBox = ({ student, score }) => {
+
+    const InputScoreBox = ({ student, scoreTitle, classId, scoreNumber }) => {
+        let myScore = [];
+        if (scoreNumber) {
+            myScore = scoreNumber.filter(
+                (number) =>
+                    number.student_id === student._id &&
+                    number.class_id === classId,
+            );
+        }
+        console.log(myScore);
         return (
             <div className="input-score">
                 <div className="std-info">
@@ -37,7 +46,7 @@ const ProfessorScore = ({ lecture }) => {
                 <div className="hide">{student._id}</div>
 
                 <form onSubmit={submitScore}>
-                    {score.map((item, index) => (
+                    {scoreTitle.map((item, index) => (
                         <div
                             id={`score${index}`}
                             key={`score${index}`}
@@ -48,6 +57,12 @@ const ProfessorScore = ({ lecture }) => {
                                 type="text"
                                 name={`score${index}`}
                                 id={`score${index}`}
+                                autoComplete="false"
+                                defaultValue={
+                                    myScore.length === 0
+                                        ? ''
+                                        : myScore[0].scores[index]
+                                }
                             />
                         </div>
                     ))}
@@ -70,16 +85,22 @@ const ProfessorScore = ({ lecture }) => {
                 </p>
             </div>
         ) : (
-            <>수업을 선택해 주세요</>
+            <div className="title">
+                <p>수업을 선택해 주세요</p>
+            </div>
         );
     };
 
-    const Test = () => {
+    const ScoreBoxes = () => {
         return lecture && lecture.length > 0 ? (
             lecture[0].students.map((student) => (
                 <InputScoreBox
                     student={student}
-                    score={lecture[0].score_title}
+                    scoreTitle={lecture[0].score_title}
+                    scoreNumber={
+                        lecture[0].scores.length > 0 ? lecture[0].scores : null
+                    }
+                    classId={lecture[0]._id}
                     key={student._id}
                 />
             ))
@@ -91,7 +112,7 @@ const ProfessorScore = ({ lecture }) => {
     return (
         <div className="pro-score-container">
             <Title />
-            <Test />
+            <ScoreBoxes />
         </div>
     );
 };

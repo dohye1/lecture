@@ -10,6 +10,7 @@ const userReducer = (state = {}, action) => {
         case AUTH_USER_RESULT:
             return { isAuth: action.payload.isAuth, user: action.payload.user };
         case LOGIN_RESULT:
+            console.log(action.payload.login);
             return { login: action.payload.login };
         case LOGOUT_RESULT:
             return { logout: action.payload.logout };

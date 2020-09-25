@@ -13,7 +13,9 @@ const scoreSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Class'
   },
-  scores: Array
+  scores: {
+    type: Array
+  }
 });
 
 const model = mongoose.model('Score', scoreSchema);

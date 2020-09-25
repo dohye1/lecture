@@ -75,7 +75,7 @@ export const postLogin = async (req, res) => {
         .json({ login: true, user: user._id });
     }
   } catch (error) {
-    console.log(error);
+    return res.status(400).json({ login: false });
   }
 };
 

@@ -26,6 +26,8 @@ $engFam: 'Roboto', sans-serif;
         padding: 30px 20px;
         box-sizing: border-box;
         border: 2px solid #acacac;
+        margin: 10px 0;
+        position: relative;
         .std-info {
             width: 90%;
             display: flex;
@@ -51,7 +53,7 @@ $engFam: 'Roboto', sans-serif;
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
-                margin: 10px 0;
+                margin: 5px 0;
                 label {
                     font-size: 15px;
                 }
@@ -63,12 +65,15 @@ $engFam: 'Roboto', sans-serif;
                 }
             }
             button {
-                width: 9vw;
+                position: absolute;
+                top: 2vh;
+                right: 14vh;
+                width: 6vw;
                 height: 4vh;
                 border: none;
                 background-color: #848fb1;
+                border-radius: 2px;
                 color: white;
-                margin-top: 2vh;
                 cursor: pointer;
                 transition: all 0.5s ease;
                 &:hover {

@@ -44,7 +44,8 @@ const ScorePage = (props) => {
             MyLectures &&
             MyLectures.map((lecture, index) => {
                 return (
-                    lectures && (
+                    lectures &&
+                    lecture && (
                         <MiniLecture
                             key={lecture._id}
                             lecture={lectures[index]}

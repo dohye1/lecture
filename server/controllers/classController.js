@@ -3,7 +3,7 @@ import User from '../model/User';
 
 export const getAll = async (req, res) => {
   try {
-    const all = await Class.find().populate('students');
+    const all = await Class.find().populate('students').populate('scores');
     return res.status(200).json({ allClass: true, all });
   } catch (error) {
     console.error(error);
@@ -61,7 +61,7 @@ export const postEnroll = async (req, res) => {
   try {
     const enrollClassResult = await Class.findByIdAndUpdate(
       { _id: lectureId },
-      { $addToSet: { students: [_id] } }
+      { $addToSet: { students: [_id] }, $inc: { std_count: 1 } }
     );
     if (!enrollClassResult) {
       return res.status(200).json({ enrollResult: false });
