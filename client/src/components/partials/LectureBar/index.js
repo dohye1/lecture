@@ -14,10 +14,7 @@ const LectureBar = ({ lecture }) => {
                     </p>
                     <p>{lecture.class_room}</p>
                     <p>
-                        {lecture.start_date} - {lecture.end_date}
-                    </p>
-                    <p>
-                        {lecture.start_time} - {lecture.end_time}
+                        {lecture.std_count} / {lecture.std_max}
                     </p>
                 </div>
             </Link>

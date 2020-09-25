@@ -120,7 +120,7 @@ const OpenLecture = (props) => {
                         />
                     </div>
                     <div className="input-box">
-                        <label htmlFor="maxNum">수강인원</label>
+                        <label htmlFor="maxNum">수강인원(명)</label>
                         <input
                             type="text"
                             id="maxNum"
@@ -153,9 +153,10 @@ const OpenLecture = (props) => {
                 <div className="score-box">
                     <h3>수료기준 설정</h3>
                     <p>
-                        평가 항목을 설정해 주세요 ( ex ) midterm, finalterm,
+                        - 평가 항목을 설정해 주세요 ( ex ) midterm, finalterm,
                         test... )<br />
-                        평가 항목은 최소 1개를 설정해야 합니다
+                        - 평가 항목은 최소 1개를 설정해야 합니다
+                        <br />- 영어로 입력해 주세요
                     </p>
                     <ScoreBoard />
                     {CountBox > 4 ? (
@@ -167,7 +168,9 @@ const OpenLecture = (props) => {
                     )}
                 </div>
                 <div className="btn-box">
-                    <button type="reset">뒤로가기</button>
+                    <button type="reset">
+                        <Link to="/">뒤로가기</Link>
+                    </button>
                     <button type="submit">개설하기</button>
                 </div>
             </form>

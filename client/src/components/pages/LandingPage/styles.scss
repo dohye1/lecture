@@ -1,63 +1,63 @@
-.landing-container{
-    width:70%;
+.landing-container {
+    width: 70%;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: flex-start;
-    margin-top:100px;
-    .landing-box{
-        width:70%;
-        padding:50px 100px;
-        .info{
-            width:100%;
+    margin-top: 100px;
+    .landing-box {
+        width: 70%;
+        padding: 50px 100px;
+        .info {
+            width: 100%;
             display: flex;
             flex-direction: row;
             align-items: center;
             justify-content: space-between;
-            margin-bottom:2vh;
-            h2{
-                width:50%;
-                font-size:30px;
+            margin-bottom: 2vh;
+            h2 {
+                width: 50%;
+                font-size: 30px;
                 font-weight: 500;
-                color:#515151;
+                color: #515151;
             }
-            .lecture-menu{
+            .lecture-menu {
                 display: flex;
                 flex-direction: row;
-                width:50%;
+                width: 50%;
                 justify-content: flex-end;
                 align-items: center;
-                .add-lecture{
-                    background-color: #526396;
-                    width:6vw;
-                    height:4vh;
+                .add-lecture {
+                    background-color: #8a96bd;
+                    width: 6vw;
+                    height: 4vh;
                     display: flex;
                     flex-direction: row;
                     align-items: center;
                     justify-content: center;
                     border-radius: 20px;
-                    margin-right:15px;
-                    font-size:1em;
+                    margin-right: 15px;
+                    font-size: 1em;
+                    transition: all 0.5s ease;
                     cursor: pointer;
-                    a{
-                        color:rgb(235, 235, 235);
+                    a {
+                        color: rgb(235, 235, 235);
                     }
-                    &:hover a{
-                        color:#fff;
+                    &:hover {
+                        background-color: #7b84a4;
                     }
                 }
-                .select-box{
-                    border:none;
-                    outline:none;
-                    padding:10px 3px;
+                .select-box {
+                    border: none;
+                    outline: none;
+                    padding: 10px 3px;
                     border-bottom: 1px solid #a7a7a7;
                 }
             }
-            
         }
     }
-    .show-lectures{
-        width:100%;
+    .show-lectures {
+        width: 100%;
         display: flex;
         flex-direction: column;
         justify-content: center;
