@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import MiniProfile from '../../partials/MiniProfile';
 import MiniLecture from '../../partials/MiniLecture';
 import StudentScore from '../../partials/StudentScore';

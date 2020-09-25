@@ -1,5 +1,6 @@
 import Class from '../model/Class';
 import User from '../model/User';
+import Score from '../model/Score';
 
 export const getAll = async (req, res) => {
   try {
@@ -37,16 +38,10 @@ export const postNew = async (req, res) => {
       description: description,
       score_title: scoreTitle
     });
-    if (!newClass) {
-      return res.status(200).json({ newLecture: false });
-    }
-    const proResult = await User.findByIdAndUpdate(
+    await User.findByIdAndUpdate(
       { _id },
       { $addToSet: { classes: [newClass._id] } }
     );
-    if (!proResult) {
-      return res.status(200).json({ newLecture: false });
-    }
     return res.status(200).json({ newLecture: true });
   } catch (error) {
     console.error(error);
@@ -56,23 +51,31 @@ export const postNew = async (req, res) => {
 export const postEnroll = async (req, res) => {
   const {
     user: { _id },
-    body: { lectureId }
+    body: { lectureId, professorId }
   } = req;
   try {
-    const enrollClassResult = await Class.findByIdAndUpdate(
+    const newScore = await Score.create({
+      professor_id: professorId,
+      student_id: _id,
+      class_id: lectureId
+    });
+    await Class.findByIdAndUpdate(
       { _id: lectureId },
-      { $addToSet: { students: [_id] }, $inc: { std_count: 1 } }
+      {
+        $addToSet: { students: [_id], scores: [newScore._id] },
+        $inc: { std_count: 1 }
+      }
     );
-    if (!enrollClassResult) {
-      return res.status(200).json({ enrollResult: false });
-    }
-    const enrollUserResult = await User.findByIdAndUpdate(
+    await User.findByIdAndUpdate(
       { _id },
-      { $addToSet: { classes: [enrollClassResult._id] } }
+      {
+        $addToSet: { classes: [lectureId], scores: [newScore._id] }
+      }
     );
-    if (!enrollUserResult) {
-      return res.status(200).json({ enrollResult: false });
-    }
+    await User.findByIdAndUpdate(
+      { _id: professorId },
+      { $addToSet: { scores: [newScore._id] } }
+    );
     return res.status(200).json({ enrollResult: true });
   } catch (error) {
     console.error(error);

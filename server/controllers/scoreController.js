@@ -4,31 +4,15 @@ import Score from '../model/Score';
 
 export const postEvaluate = async (req, res) => {
   const {
-    body: { classId, stdId, score0, score1, score2, score3, score4 },
-    user: { _id }
+    body: { scoreId, score0, score1, score2, score3, score4 }
   } = req;
 
   try {
-    const evaluate = await Score.create({
-      professor_id: _id,
-      student_id: stdId,
-      class_id: classId,
-      scores: [score0, score1, score2, score3, score4]
-    });
-    await Class.findByIdAndUpdate(
-      { _id: classId },
-      { $addToSet: { scores: evaluate._id } }
+    await Score.findByIdAndUpdate(
+      { _id: scoreId },
+      { scores: [score0, score1, score2, score3, score4] }
     );
-    await User.findByIdAndUpdate(
-      { _id: _id },
-      { $addToSet: { scores: [evaluate._id] } }
-    );
-    await User.findByIdAndUpdate(
-      { _id: stdId },
-      { $addToSet: { scores: [evaluate._id] } }
-    );
-
-    return res.status(200).json({ c: true, scoreInfo: evaluate });
+    return res.status(200).json({ evaluateResult: true });
   } catch (error) {
     console.error(error);
   }

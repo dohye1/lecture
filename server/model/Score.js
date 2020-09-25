@@ -14,7 +14,8 @@ const scoreSchema = new mongoose.Schema({
     ref: 'Class'
   },
   scores: {
-    type: Array
+    type: Array,
+    default: ['', '', '', '', '']
   }
 });
 

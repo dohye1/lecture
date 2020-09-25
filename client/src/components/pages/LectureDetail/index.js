@@ -18,7 +18,12 @@ const LectureDetail = (props) => {
     const lectureId = props.match.params.id;
     const handleApply = (e) => {
         e.preventDefault();
-        dispatch(enrollClass({ lectureId: lectureId }));
+        dispatch(
+            enrollClass({
+                lectureId: lectureId,
+                professorId: Lecture.professor_id,
+            }),
+        );
     };
     const EnrollBtn = () => {
         return props.user && props.user.role == 2 ? (

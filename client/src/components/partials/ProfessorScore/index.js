@@ -8,13 +8,10 @@ import './styles.scss';
 
 const ProfessorScore = ({ lecture }) => {
     const dispatch = useDispatch();
-    console.log(lecture);
     const submitScore = (e) => {
         e.preventDefault();
-        console.log(e.target.parentNode.children);
         const scoreData = {
-            classId: lecture[0]._id,
-            stdId: e.target.parentNode.children[1].innerText,
+            scoreId: e.target.parentNode.children[1].innerText,
             score0: e.target.score0 ? e.target.score0.value : -1,
             score1: e.target.score1 ? e.target.score1.value : -1,
             score2: e.target.score2 ? e.target.score2.value : -1,
@@ -33,7 +30,6 @@ const ProfessorScore = ({ lecture }) => {
                     number.class_id === classId,
             );
         }
-        console.log(myScore);
         return (
             <div className="input-score">
                 <div className="std-info">
@@ -43,7 +39,7 @@ const ProfessorScore = ({ lecture }) => {
                     </p>
                 </div>
 
-                <div className="hide">{student._id}</div>
+                <div className="hide">{myScore[0]._id}</div>
 
                 <form onSubmit={submitScore}>
                     {scoreTitle.map((item, index) => (
@@ -58,11 +54,7 @@ const ProfessorScore = ({ lecture }) => {
                                 name={`score${index}`}
                                 id={`score${index}`}
                                 autoComplete="false"
-                                defaultValue={
-                                    myScore.length === 0
-                                        ? ''
-                                        : myScore[0].scores[index]
-                                }
+                                defaultValue={myScore[0].scores[index]}
                             />
                         </div>
                     ))}
@@ -92,6 +84,7 @@ const ProfessorScore = ({ lecture }) => {
     };
 
     const ScoreBoxes = () => {
+        console.log(lecture);
         return lecture && lecture.length > 0 ? (
             lecture[0].students.map((student) => (
                 <InputScoreBox
