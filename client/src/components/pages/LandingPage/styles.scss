@@ -29,7 +29,8 @@
                 align-items: center;
                 .add-lecture {
                     background-color: #8a96bd;
-                    width: 6vw;
+                    width: 5vw;
+                    min-width: 70px;
                     height: 4vh;
                     display: flex;
                     flex-direction: row;
@@ -37,7 +38,7 @@
                     justify-content: center;
                     border-radius: 20px;
                     margin-right: 15px;
-                    font-size: 1em;
+                    font-size: 0.8em;
                     transition: all 0.5s ease;
                     cursor: pointer;
                     a {

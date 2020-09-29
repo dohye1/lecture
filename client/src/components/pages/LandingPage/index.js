@@ -4,9 +4,11 @@ import { Link, withRouter } from 'react-router-dom';
 import MiniProfile from '../../partials/MiniProfile';
 import LectureBar from '../../partials/LectureBar';
 import { allClass } from '../../../actions/class_action';
+import { update } from '../../../actions/user_action';
 import { PlusCircleOutlined } from '@ant-design/icons';
 
 import './styles.scss';
+
 const departmentArr = [
     'ALL',
     '인문대학',
@@ -25,51 +27,33 @@ const departmentArr = [
     '약학대학',
     '행정학부',
 ];
-const LandingPage = ({ user }) => {
+
+const LandingPage = () => {
     const dispatch = useDispatch();
     const [IsFirst, setIsFirst] = useState(true);
     const [SelectedLecutres, setSelectedLecutres] = useState([]);
     const [Department, setDepartment] = useState('ALL');
     const lectures = useSelector((state) => state.classReducer.class);
-    const newClassResult = useSelector(
-        (state) => state.classReducer.newClassResult,
-    );
-    const enrollResult = useSelector(
-        (state) => state.classReducer.enrollResult,
-    );
+    const user = useSelector((state) => state.userReducer.user);
 
-    let selectedLecutres;
-
-    useEffect(() => {
-        if (lectures === undefined || newClassResult || enrollResult) {
-            dispatch(allClass());
-        } else {
-            if (IsFirst) initializeDepartment();
-        }
-    }, [lectures, SelectedLecutres, newClassResult, enrollResult]);
-
-    const initializeDepartment = () => {
-        setSelectedLecutres(lectures);
-        setIsFirst(false);
-    };
+    const initializeDepartment = () => {};
 
     const changeDepartment = (e) => {
         e.preventDefault();
         setDepartment(departmentArr[e.target.value]);
-        selectedLecutres =
-            lectures &&
-            lectures.filter((lecture) => {
-                if (e.target.value != 0) {
+        if (parseInt(e.target.value) === 0) {
+            setIsFirst(true);
+        } else {
+            const selectedLecutres =
+                lectures &&
+                lectures.filter((lecture) => {
                     return (
                         lecture.class_department ===
                         departmentArr[e.target.value]
                     );
-                } else {
-                    return true;
-                }
-            });
-
-        setSelectedLecutres(selectedLecutres);
+                });
+            setSelectedLecutres(selectedLecutres);
+        }
     };
 
     const ShowLectures = () => {
@@ -82,6 +66,16 @@ const LandingPage = ({ user }) => {
             </div>
         );
     };
+
+    useEffect(() => {
+        if (!lectures) {
+            dispatch(allClass());
+            dispatch(update());
+        } else if (IsFirst) {
+            setSelectedLecutres(lectures);
+            setIsFirst(false);
+        }
+    }, [lectures, IsFirst]);
 
     return (
         <div className="landing-container">

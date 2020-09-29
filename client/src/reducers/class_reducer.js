@@ -1,4 +1,3 @@
-import { contentSecurityPolicy } from 'helmet';
 import {
     ALL_CLASS_RESULT,
     NEW_CLASS_RESULT,

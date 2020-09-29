@@ -8,25 +8,31 @@ import './styles.scss';
 //강의내용을 보고 강의신청할수있는 페이지임
 const LectureDetail = (props) => {
     const dispatch = useDispatch();
+    const [Lecture, setLecture] = useState();
     const lectures = useSelector((state) => state.classReducer.class);
     const role = useSelector((state) => state.userReducer.role);
     const enrollResult = useSelector(
         (state) => state.classReducer.enrollResult,
     );
 
-    const [Lecture, setLecture] = useState();
     const lectureId = props.match.params.id;
+
     const handleApply = (e) => {
         e.preventDefault();
-        dispatch(
-            enrollClass({
-                lectureId: lectureId,
-                professorId: Lecture.professor_id,
-            }),
-        );
+        if (Lecture.std_count === Lecture.std_max) {
+            alert('수강인원이 다 찼습니다.');
+        } else {
+            dispatch(
+                enrollClass({
+                    lectureId: lectureId,
+                    professorId: Lecture.professor_id,
+                }),
+            );
+        }
     };
+
     const EnrollBtn = () => {
-        return props.user && props.user.role == 2 ? (
+        return props.user && props.user.role === 2 ? (
             <></>
         ) : (
             <button type="button" onClick={handleApply}>
@@ -34,6 +40,7 @@ const LectureDetail = (props) => {
             </button>
         );
     };
+
     useEffect(() => {
         if (enrollResult) {
             props.history.push('/');
@@ -42,7 +49,7 @@ const LectureDetail = (props) => {
             lectures.map((lecture) => {
                 if (lecture._id === lectureId) {
                     setLecture(lecture);
-                    return;
+                    return 0;
                 }
             });
         }
@@ -73,7 +80,7 @@ const LectureDetail = (props) => {
                         <p>수강인원</p>
                         <p>{Lecture.std_max}</p>
                         <p>강의설명</p>
-                        <p>{Lecture.description}</p>
+                        <p className="desc">{Lecture.description}</p>
                         <p>성적산정방식</p>
                         <div className="score-title">
                             {Lecture.score_title.map((title) => (

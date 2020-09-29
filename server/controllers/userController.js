@@ -32,7 +32,7 @@ export const postRegister = async (req, res) => {
     // db에 동일한 이메일, 학번이 있는지 체크
     const userCheck = await User.findOne({ Email, IdNum });
     if (userCheck !== null) {
-      return res.status(400).json({ register: false, reason: 'email' });
+      return res.status(400).json({ register: false });
     }
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(Password, salt);
@@ -47,10 +47,10 @@ export const postRegister = async (req, res) => {
     if (newUser) {
       return res.status(200).json({ register: true });
     } else {
-      return res.status(400).json({ register: false });
+      return res.status(200).json({ register: false });
     }
   } catch (error) {
-    console.log(error);
+    return res.status(400).json({ register: false });
   }
 };
 
@@ -61,7 +61,7 @@ export const postLogin = async (req, res) => {
   try {
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(400).json({ login: false });
+      return res.status(200).json({ login: false });
     }
     const result = await bcrypt.compare(password, user.password);
     if (result) {
@@ -107,4 +107,16 @@ export const getAuth = (req, res) => {
     user: { id: _id, name, email, department, id_num, role, classes },
     isAuth: true
   });
+};
+
+export const getupdate = async (req, res) => {
+  const {
+    user: { _id }
+  } = req;
+  try {
+    const user = await User.findById({ _id });
+    return res.status(200).json({ user });
+  } catch (error) {
+    return res.status(200).json({ user: false });
+  }
 };

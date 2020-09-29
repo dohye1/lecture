@@ -58,10 +58,12 @@ $engFam: 'Roboto', sans-serif;
                     font-size: 15px;
                 }
                 input {
+                    width: 30%;
                     border: none;
                     outline: none;
                     border-bottom: 1px solid #8e8e8e;
-                    padding: 7px 3px;
+                    padding: 7px 10px;
+                    text-align: end;
                 }
             }
             button {

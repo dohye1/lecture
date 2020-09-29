@@ -7,6 +7,8 @@ export const REGISTER = 'register';
 export const REGISTER_RESULT = 'register_result';
 export const LOGOUT = 'logout';
 export const LOGOUT_RESULT = 'logout_result';
+export const UPDATE = 'update';
+export const UPDATE_RESULT = 'update_result';
 
 //Class
 export const ALL_CLASS = 'all_class';

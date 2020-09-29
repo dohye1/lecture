@@ -7,7 +7,6 @@ import './styles.scss';
 
 const Register = (props) => {
     const dispatch = useDispatch();
-    const registerResult = useSelector((state) => state.userReducer.register);
     const [Name, setName] = useState('');
     const [Email, setEmail] = useState('');
     const [Department, setDepartment] = useState(0);
@@ -22,25 +21,26 @@ const Register = (props) => {
     const [IdNumCss, setIdNumCss] = useState('');
     const [ConfirmPwCss, setConfirmPwCss] = useState('');
 
+    const registerResult = useSelector((state) => state.userReducer.register);
     const handleClick = (e) => {
         e.preventDefault();
-        if (Email == '') {
+        if (Email === '') {
             setEmailCss('warning');
             setTimeout(() => setEmailCss(''), 1500);
         }
-        if (Password == '') {
+        if (Password === '') {
             setPwCss('warning');
             setTimeout(() => setPwCss(''), 1500);
         }
-        if (Name == '') {
+        if (Name === '') {
             setNameCss('warning');
             setTimeout(() => setNameCss(''), 1500);
         }
-        if (IdNum == '') {
+        if (IdNum === '') {
             setIdNumCss('warning');
             setTimeout(() => setIdNumCss(''), 1500);
         }
-        if (ConfirmPassword == '') {
+        if (ConfirmPassword === '') {
             setConfirmPwCss('warning');
             setTimeout(() => setConfirmPwCss(''), 1500);
         }

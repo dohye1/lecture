@@ -9,6 +9,7 @@ const StudentScore = ({ lecture }) => {
     const [TotalScore, setTotalScore] = useState(0);
     const user = useSelector((state) => state.userReducer.user);
     let countScoreNum;
+
     const MyScore = () => {
         return lecture.length > 0 ? (
             <div>
@@ -35,9 +36,11 @@ const StudentScore = ({ lecture }) => {
 
     useEffect(() => {
         let totalScore = 0;
+        let matched;
         if (lecture.length > 0 && MatchedScore === undefined) {
             lecture[0].scores.map((score, index) => {
-                if (score.student_id == user.id) {
+                if (score.student_id === user.id) {
+                    matched = score;
                     totalScore = score.scores.reduce(
                         (totalScore, currValue) => {
                             return parseInt(currValue) > 0
@@ -46,12 +49,12 @@ const StudentScore = ({ lecture }) => {
                         },
                         0,
                     );
-                    setTotalScore(totalScore);
-                    setMatchedScore(score);
                 }
             });
+            setTotalScore(totalScore);
+            setMatchedScore(matched);
         }
-    }, [MatchedScore]);
+    }, []);
 
     return (
         <div className="std-score-container">

@@ -1,10 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import './styles.scss';
 
 const MiniProfile = () => {
     const user = useSelector((state) => state.userReducer.user);
-    useEffect(() => {});
     return (
         <div className="mini-container">
             {user && (
@@ -15,7 +14,7 @@ const MiniProfile = () => {
                     </h3>
                     <p>{user.email}</p>
                     <p>
-                        {user.department} / {user.role == 1 ? '학생' : '교수'}
+                        {user.department} / {user.role === 1 ? '학생' : '교수'}
                     </p>
                 </>
             )}

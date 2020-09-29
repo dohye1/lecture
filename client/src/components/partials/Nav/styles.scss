@@ -1,48 +1,48 @@
-$korfam : 'Noto Sans KR', sans-serif;
-$engFam : 'Roboto', sans-serif;
+$korfam: 'Noto Sans KR', sans-serif;
+$engFam: 'Roboto', sans-serif;
 $logoFam: 'Rubik', sans-serif;
 
-.nav-container{
-    width:100%;
-    height:70px;
-    background-color: rgb(208, 208, 208);
+.nav-container {
+    width: 100%;
+    height: 70px;
+    box-shadow: 2px 5px 8px 1px #e0e0e047;
     display: flex;
     flex-direction: row;
-    .logo{
-        width:50%;
+    .logo {
+        width: 50%;
         text-align: center;
-        line-height:70px;
-        a{
+        line-height: 70px;
+        a {
             font-family: #{$logoFam};
-            font-size:22px;
+            font-size: 22px;
             font-style: italic;
-            color:rgb(82, 99, 150);
+            color: rgb(82, 99, 150);
         }
     }
-    .eng{
+    .eng {
         font-family: #{$engFam};
-        font-size:14px;
+        font-size: 14px;
         font-weight: 500;
     }
-    .kor{
+    .kor {
         font-family: #{$korfam};
-        font-size:14px;
+        font-size: 14px;
         font-weight: 500;
     }
-    .nav-menu{
-        width:50%;
+    .nav-menu {
+        width: 50%;
         display: flex;
         flex-direction: row;
-        line-height:70px;
-        li a{
-            margin-right:30px;
-            color:#fafafa;
+        line-height: 70px;
+        li a {
+            margin-right: 30px;
+            color: #969696;
         }
-        &_user li:first-child{
-            margin-left:200px;
+        &_user li:first-child {
+            margin-left: 200px;
         }
-        &_all li:first-child{
-            margin-left:300px;  
+        &_all li:first-child {
+            margin-left: 300px;
         }
     }
 }

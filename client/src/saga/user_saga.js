@@ -1,6 +1,42 @@
-import { all, fork, put, call, takeEvery, takeLatest } from 'redux-saga/effects';
-import { AUTH_USER, AUTH_USER_RESULT, LOGIN, LOGIN_RESULT, LOGOUT, LOGOUT_RESULT, REGISTER, REGISTER_RESULT } from '../actions/types';
+import {
+    all,
+    fork,
+    put,
+    call,
+    takeEvery,
+    takeLatest,
+} from 'redux-saga/effects';
+import {
+    AUTH_USER,
+    AUTH_USER_RESULT,
+    LOGIN,
+    LOGIN_RESULT,
+    LOGOUT,
+    LOGOUT_RESULT,
+    REGISTER,
+    REGISTER_RESULT,
+    UPDATE,
+    UPDATE_RESULT,
+} from '../actions/types';
 import axios from 'axios';
+
+//-------------update----------------\
+async function updateAPI() {
+    return await axios.get('/api/user/update');
+}
+
+function* update() {
+    try {
+        const payload = yield call(updateAPI);
+        yield put({
+            type: UPDATE_RESULT,
+            payload,
+        });
+    } catch (error) {
+        console.log(error);
+    }
+}
+//-------------update----------------
 
 //-------------logout----------------\
 async function logoutAPI() {
@@ -12,64 +48,65 @@ function* logout() {
         const payload = yield call(logoutAPI);
         yield put({
             type: LOGOUT_RESULT,
-            payload
-        })
+            payload,
+        });
     } catch (error) {
-        console.log(error)
+        console.log(error);
     }
 }
 //-------------logout----------------
 
-
 //-------------register----------------
 let registerInfo;
 async function registerAPI() {
-    return await axios.post('/api/user/register', registerInfo).then(response => response.data);
+    return await axios
+        .post('/api/user/register', registerInfo)
+        .then((response) => response.data);
 }
 
 function* register({ payload }) {
     try {
         registerInfo = payload;
         const registerResult = yield call(registerAPI);
-        yield put({ type: REGISTER_RESULT, payload: registerResult })
+        yield put({ type: REGISTER_RESULT, payload: registerResult });
     } catch (error) {
-        console.log(error)
+        console.log(error);
     }
 }
 
 //-------------register----------------
 
-
 //-------------login----------------
 let loginInfo;
 async function loginAPI() {
-    return await axios.post('/api/user/login', loginInfo).then(response => response.data);
+    return await axios
+        .post('/api/user/login', loginInfo)
+        .then((response) => response.data);
 }
 
 function* login({ payload }) {
     try {
         loginInfo = payload;
         const loginResult = yield call(loginAPI);
-        yield put({ type: LOGIN_RESULT, payload: loginResult })
+        yield put({ type: LOGIN_RESULT, payload: loginResult });
     } catch (error) {
-        console.log(error)
+        console.log(error);
     }
 }
 
 //-------------login----------------
 
-
 //-------------auth----------------
 async function authAPI() {
-    return await axios.get('/api/user/auth').then(response => response.data);
+    return await axios.get('/api/user/auth').then((response) => response.data);
 }
 
 function* authUser() {
     try {
         const payload = yield call(authAPI);
-        yield put({ type: AUTH_USER_RESULT, payload })
+        yield put({ type: AUTH_USER_RESULT, payload });
     } catch (error) {
-        console.log(error)
+        console.log('여기에러발생함' + error);
     }
 }
 //-------------auth----------------
@@ -79,9 +116,9 @@ function* watchUser() {
     yield takeLatest(LOGIN, login);
     yield takeLatest(REGISTER, register);
     yield takeLatest(LOGOUT, logout);
-
+    yield takeEvery(UPDATE, update);
 }
 
 export default function* userSaga() {
-    yield all([fork(watchUser)])
+    yield all([fork(watchUser)]);
 }

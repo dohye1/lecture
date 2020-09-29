@@ -2,7 +2,8 @@ $korfam: 'Noto Sans KR', sans-serif;
 .mini-container {
     width: 13vw;
     height: 200px;
-    background-color: #dadada;
+    box-shadow: 3px 2px 12px 1px rgba(49, 49, 49, 0.129);
+    border: 2px solid #a5bccc;
     border-radius: 5px;
     display: flex;
     flex-direction: column;

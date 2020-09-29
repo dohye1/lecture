@@ -73,7 +73,7 @@ function* allClass() {
             payload,
         });
     } catch (error) {
-        console.log(error);
+        console.log('여기에러발생했음' + error);
     }
 }
 //-------------allClass----------------

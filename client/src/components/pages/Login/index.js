@@ -11,14 +11,15 @@ const Login = () => {
     const [Password, setPassword] = useState('');
     const [EmailCss, setEmailCss] = useState('');
     const [PwCss, setPwCss] = useState('');
+    let loginResult = useSelector((state) => state.userReducer.login);
 
     const handleClick = (e) => {
         e.preventDefault();
-        if (Email == '') {
+        if (Email === '') {
             setEmailCss('warning');
             setTimeout(() => setEmailCss(''), 1500);
         }
-        if (Password == '') {
+        if (Password === '') {
             setPwCss('warning');
             setTimeout(() => setPwCss(''), 1500);
         }
@@ -27,7 +28,11 @@ const Login = () => {
         }
     };
 
-    useEffect(() => {}, [EmailCss]);
+    useEffect(() => {
+        if (loginResult === false) {
+            alert('login에 실패했습니다.');
+        }
+    }, [EmailCss, loginResult]);
     return (
         <div className="login-container">
             <h1>LOG IN</h1>

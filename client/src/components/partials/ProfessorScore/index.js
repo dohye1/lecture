@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+import { useDispatch } from 'react-redux';
 import { evaluateScore } from '../../../actions/score_action';
+import { allClass } from '../../../actions/class_action';
 import './styles.scss';
 
 // 교수스코어박스에는 모든학생에 대한 박스가 있고 그 박스를 클릭하면 구체적인 성적을 입력할수있다.
@@ -19,6 +20,7 @@ const ProfessorScore = ({ lecture }) => {
             score4: e.target.score4 ? e.target.score4.value : -1,
         };
         dispatch(evaluateScore(scoreData));
+        setTimeout(() => dispatch(allClass()), 100);
     };
 
     const InputScoreBox = ({ student, scoreTitle, classId, scoreNumber }) => {
@@ -84,7 +86,6 @@ const ProfessorScore = ({ lecture }) => {
     };
 
     const ScoreBoxes = () => {
-        console.log(lecture);
         return lecture && lecture.length > 0 ? (
             lecture[0].students.map((student) => (
                 <InputScoreBox

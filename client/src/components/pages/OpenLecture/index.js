@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
-import { TimePicker, DatePicker, Space } from 'antd';
+import { TimePicker, DatePicker } from 'antd';
 import { newClass } from '../../../actions/class_action';
 
 import './styles.scss';
@@ -16,6 +16,7 @@ const OpenLecture = (props) => {
     const newClassResult = useSelector(
         (state) => state.classReducer.newClassResult,
     );
+
     const ScoreBoard = () => {
         return ScoreBox.map(
             (item, index) => item && <Box index={index} key={index} />,
@@ -29,7 +30,7 @@ const OpenLecture = (props) => {
     };
 
     const clickDeleteScoreBoard = (e) => {
-        if (CountBox == 1) {
+        if (CountBox === 1) {
             alert('평가항목을 적어도 1가지는 입력해야 합니다.');
             return;
         }

@@ -5,6 +5,7 @@ const routes = {
   logout: '/logout',
   auth: '/auth',
   editProfile: '/profile/edit',
+  update: '/update',
   apiClass: '/api/class',
   all: '/all',
   new: '/new',

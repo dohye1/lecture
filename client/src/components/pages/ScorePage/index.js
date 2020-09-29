@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import MiniProfile from '../../partials/MiniProfile';
 import MiniLecture from '../../partials/MiniLecture';
 import StudentScore from '../../partials/StudentScore';
@@ -8,27 +8,27 @@ import ProfessorScore from '../../partials/ProfessorScore';
 import './styles.scss';
 
 const ScorePage = (props) => {
-    const lectures = useSelector((state) => state.classReducer.class);
-    const evaluateResult = useSelector(
-        (state) => state.scoreReducer.evaluateResult,
-    );
+    const [IsFirst, setIsFirst] = useState(true);
     const [MyLectures, setMyLectures] = useState([]);
     const [SelectedLecture, setSelectedLecture] = useState();
+
+    const lectures = useSelector((state) => state.classReducer.class);
+    const user = useSelector((state) => state.userReducer.user);
     useEffect(() => {
         if (lectures) {
-            if (MyLectures.length === 0) {
-                console.log('값이 업데이트됨');
-                findLectures(lectures);
+            if (IsFirst) {
+                findLectures();
+                setIsFirst(false);
             }
         }
-    }, [lectures, MyLectures, SelectedLecture, evaluateResult]);
+    }, [lectures]);
 
-    const findLectures = (lectures) => {
+    const findLectures = () => {
         if (lectures) {
             let lectureArr = lectures.map((lecture) =>
-                props.user.role === 1
-                    ? props.user.classes.includes(lecture._id)
-                    : lecture.professor_id === props.user.id,
+                user.role === 1
+                    ? user.classes.includes(lecture._id)
+                    : lecture.professor_id === user.id,
             );
             setMyLectures(lectureArr);
         }
@@ -47,7 +47,7 @@ const ScorePage = (props) => {
                     lectures &&
                     lecture && (
                         <MiniLecture
-                            key={lecture._id}
+                            key={lecture._id + 'preventNaN' + index}
                             lecture={lectures[index]}
                             clickEvent={changeLecture}
                         />
