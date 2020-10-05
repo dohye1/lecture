@@ -36,8 +36,6 @@ const LandingPage = () => {
     const lectures = useSelector((state) => state.classReducer.class);
     const user = useSelector((state) => state.userReducer.user);
 
-    const initializeDepartment = () => {};
-
     const changeDepartment = (e) => {
         e.preventDefault();
         setDepartment(departmentArr[e.target.value]);
@@ -70,7 +68,6 @@ const LandingPage = () => {
     useEffect(() => {
         if (!lectures) {
             dispatch(allClass());
-            dispatch(update());
         } else if (IsFirst) {
             setSelectedLecutres(lectures);
             setIsFirst(false);
