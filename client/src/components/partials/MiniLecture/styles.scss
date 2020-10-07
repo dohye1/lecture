@@ -13,9 +13,12 @@ $korfam: 'Noto Sans KR', sans-serif;
     align-items: flex-start;
     cursor: pointer;
     h4 {
-        font-size: 19px;
+        font-size: 1.2em;
         font-weight: 500;
         font-family: #{$korfam};
         margin: 0;
+    }
+    p {
+        font-size: 0.9em;
     }
 }

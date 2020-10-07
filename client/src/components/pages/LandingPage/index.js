@@ -68,6 +68,9 @@ const LandingPage = () => {
     useEffect(() => {
         if (!lectures) {
             dispatch(allClass());
+            if (user && user.role === 1) {
+                dispatch(update());
+            }
         } else if (IsFirst) {
             setSelectedLecutres(lectures);
             setIsFirst(false);

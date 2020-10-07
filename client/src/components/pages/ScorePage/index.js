@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import MiniProfile from '../../partials/MiniProfile';
 import MiniLecture from '../../partials/MiniLecture';
 import StudentScore from '../../partials/StudentScore';
@@ -89,4 +90,4 @@ const ScorePage = (props) => {
     );
 };
 
-export default ScorePage;
+export default withRouter(ScorePage, true);

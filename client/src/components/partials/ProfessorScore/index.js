@@ -2,10 +2,8 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { evaluateScore } from '../../../actions/score_action';
 import { allClass } from '../../../actions/class_action';
-import './styles.scss';
 
-// 교수스코어박스에는 모든학생에 대한 박스가 있고 그 박스를 클릭하면 구체적인 성적을 입력할수있다.
-// db에 값을 저장해야하기때문에 dispatch를 사용함
+import './styles.scss';
 
 const ProfessorScore = ({ lecture }) => {
     const dispatch = useDispatch();

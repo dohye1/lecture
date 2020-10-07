@@ -10,7 +10,9 @@ const MiniLecture = ({ lecture, clickEvent }) => {
             id={lecture._id}
         >
             <h4 id={lecture._id} key={lecture._id + 1}>
-                {lecture.class_title}
+                {lecture.class_title.length > 10
+                    ? lecture.class_title.slice(0, 10) + '...'
+                    : lecture.class_title}
             </h4>
             <p id={lecture._id} key={lecture._id + 2}>
                 {lecture.professor_name} / {lecture.class_department}

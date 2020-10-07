@@ -9,7 +9,7 @@ const Nav = () => {
     const isAuth = useSelector((state) => state.userReducer.isAuth);
     const logoutResult = useSelector((state) => state.userReducer.logout);
 
-    const handleLogout = (e) => {
+    const handleLogout = () => {
         dispatch(logout());
     };
 
