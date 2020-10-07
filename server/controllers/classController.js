@@ -20,7 +20,7 @@ export const postNew = async (req, res) => {
   try {
     let scoreTitle = [];
     scoreArr.map((item, index) => {
-      if (item) {
+      if (item === 'block') {
         scoreTitle = [...scoreTitle, scoreText[index]];
       }
     });

@@ -12,7 +12,6 @@ const LectureBar = ({ lecture }) => {
                         {lecture.professor_name} 교수 /{' '}
                         {lecture.class_department}
                     </p>
-                    <p>{lecture.class_room}</p>
                     <p>
                         {lecture.std_count} / {lecture.std_max}
                     </p>

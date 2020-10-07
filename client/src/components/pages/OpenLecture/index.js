@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import { TimePicker, DatePicker } from 'antd';
@@ -8,69 +8,59 @@ import './styles.scss';
 
 const OpenLecture = (props) => {
     const dispatch = useDispatch();
-    const [CountBox, setCountBox] = useState(1);
-    const [ScoreBox, setScoreBox] = useState([true]);
-    const [BoxText, setBoxText] = useState(['']);
+    let boxText0 = useRef();
+    let boxText1 = useRef();
+    let boxText2 = useRef();
+    let boxText3 = useRef();
+    let boxText4 = useRef();
+
+    const [CountBox, setCountBox] = useState(0);
+    const [ScoreBox, setScoreBox] = useState([
+        'block',
+        'none',
+        'none',
+        'none',
+        'none',
+    ]);
+    const [BoxText, setBoxText] = useState(['', '', '', '', '']);
     const [Date, setDate] = useState();
     const [Time, setTime] = useState();
     const newClassResult = useSelector(
         (state) => state.classReducer.newClassResult,
     );
 
-    const ScoreBoard = () => {
-        return ScoreBox.map(
-            (item, index) => item && <Box index={index} key={index} />,
-        );
-    };
-
-    const handleChange = (e) => {
-        let boxText = BoxText;
-        boxText[e.target.id] = e.target.value;
-        setBoxText([...boxText]);
-    };
-
-    const clickDeleteScoreBoard = (e) => {
-        if (CountBox === 1) {
+    const clickDeleteScoreBoard = () => {
+        if (CountBox <= 0) {
             alert('평가항목을 적어도 1가지는 입력해야 합니다.');
+            setCountBox(0);
             return;
         }
+        let temp = ScoreBox;
+        let tempText = BoxText;
+        temp[CountBox] = 'none';
+        tempText[CountBox] = '';
+        setBoxText(tempText);
         setCountBox(CountBox - 1);
-        let arr = ScoreBox;
-        arr[e.target.id] = false;
-        setScoreBox([...arr]);
-    };
-
-    // 문제
-    // 1. 영어입력에는 문제가 없는데 한글로 입력하면 문제발생
-    // 2. 맨 마지막 input에 focus가 잡힘
-    const Box = ({ index }) => {
-        return (
-            <div className="score-box-each">
-                <div className="score-input-box">
-                    <label htmlFor="item">평가 항목</label>
-                    <input
-                        type="text"
-                        id={index}
-                        name="item"
-                        autoFocus
-                        value={BoxText[index]}
-                        onChange={handleChange}
-                    />
-                </div>
-                <button
-                    type="button"
-                    id={index}
-                    onClick={clickDeleteScoreBoard}
-                >
-                    평가항목 삭제하기
-                </button>
-            </div>
-        );
+        setScoreBox(temp);
     };
 
     const clickAddScoreBoard = () => {
+        if (CountBox >= 4) {
+            alert('평가항목 최대 5개까지 입력 할 수 있습니다.');
+            setCountBox(4);
+            return;
+        }
+        let temp = ScoreBox;
+        setBoxText([
+            boxText0.current.value,
+            boxText1.current.value,
+            boxText2.current.value,
+            boxText3.current.value,
+            boxText4.current.value,
+        ]);
+        temp[CountBox + 1] = 'block';
         setCountBox(CountBox + 1);
-        setScoreBox([...ScoreBox, true]);
+        setScoreBox(temp);
     };
 
     const handleSubmit = (e) => {
@@ -93,7 +83,7 @@ const OpenLecture = (props) => {
         if (newClassResult) {
             props.history.push('/');
         }
-    }, [ScoreBox, BoxText, newClassResult]);
+    }, [newClassResult]);
 
     return (
         <div className="open-container">
@@ -154,19 +144,87 @@ const OpenLecture = (props) => {
                 <div className="score-box">
                     <h3>수료기준 설정</h3>
                     <p>
-                        - 평가 항목을 설정해 주세요 ( ex ) midterm, finalterm,
-                        test... )<br />
-                        - 평가 항목은 최소 1개를 설정해야 합니다
-                        <br />- 영어로 입력해 주세요
+                        - 평가 항목을 설정해 주세요 ( ex ) 중간고사, 기말고사,
+                        과제... )<br />- 평가 항목은 최소 1개를 설정해야 합니다
                     </p>
-                    <ScoreBoard />
-                    {CountBox > 4 ? (
-                        <div></div>
-                    ) : (
+                    <div
+                        className="score-box-each"
+                        style={{ display: ScoreBox[0] }}
+                    >
+                        <div className="score-input-box">
+                            <label htmlFor="item">평가 항목</label>
+                            <input
+                                type="text"
+                                name="item"
+                                ref={boxText0}
+                                defaultValue={BoxText[0]}
+                            />
+                        </div>
+                    </div>
+                    <div
+                        className="score-box-each"
+                        style={{ display: ScoreBox[1] }}
+                    >
+                        <div className="score-input-box">
+                            <label htmlFor="item">평가 항목</label>
+                            <input
+                                type="text"
+                                name="item"
+                                ref={boxText1}
+                                defaultValue={BoxText[1]}
+                            />
+                        </div>
+                    </div>
+                    <div
+                        className="score-box-each"
+                        style={{ display: ScoreBox[2] }}
+                    >
+                        <div className="score-input-box">
+                            <label htmlFor="item">평가 항목</label>
+                            <input
+                                type="text"
+                                name="item"
+                                ref={boxText2}
+                                defaultValue={BoxText[2]}
+                            />
+                        </div>
+                    </div>
+                    <div
+                        className="score-box-each"
+                        style={{ display: ScoreBox[3] }}
+                    >
+                        <div className="score-input-box">
+                            <label htmlFor="item">평가 항목</label>
+                            <input
+                                type="text"
+                                name="item"
+                                ref={boxText3}
+                                defaultValue={BoxText[3]}
+                            />
+                        </div>
+                    </div>
+                    <div
+                        className="score-box-each"
+                        style={{ display: ScoreBox[4] }}
+                    >
+                        <div className="score-input-box">
+                            <label htmlFor="item">평가 항목</label>
+                            <input
+                                type="text"
+                                name="item"
+                                ref={boxText4}
+                                defaultValue={BoxText[4]}
+                            />
+                        </div>
+                    </div>
+                    <>
                         <button type="button" onClick={clickAddScoreBoard}>
                             평가항목 추가하기
                         </button>
-                    )}
+                        <button type="button" onClick={clickDeleteScoreBoard}>
+                            평가항목 삭제하기
+                        </button>
+                    </>
                 </div>
                 <div className="btn-box">
                     <button type="reset">
