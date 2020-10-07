@@ -43,17 +43,18 @@ $engFam: 'Roboto', sans-serif;
         margin: 20px 0;
         min-height: 50px;
         display: flex;
-        justify-content: center;
+        justify-content: space-around;
         align-items: center;
         border: 1px solid rgb(186, 186, 186);
+        padding: 0 3vw;
         h6 {
             font-size: 15px;
             font-weight: 400;
             margin: 0;
-            margin-right: 15px;
             font-family: #{$engFam};
             display: flex;
             align-items: center;
+            justify-content: center;
         }
     }
     .btn-box {

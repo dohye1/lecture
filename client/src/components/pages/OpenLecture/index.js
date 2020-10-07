@@ -73,7 +73,13 @@ const OpenLecture = (props) => {
             time: Time,
             description: e.target.description.value,
             scoreArr: ScoreBox,
-            scoreText: BoxText,
+            scoreText: [
+                boxText0.current.value,
+                boxText1.current.value,
+                boxText2.current.value,
+                boxText3.current.value,
+                boxText4.current.value,
+            ],
         };
 
         dispatch(newClass(lectureData));
