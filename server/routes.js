@@ -9,6 +9,7 @@ const routes = {
   apiClass: '/api/class',
   all: '/all',
   new: '/new',
+  editClass: '/edit',
   enroll: '/enroll',
   apiScore: '/api/score',
   show: '/show',

@@ -31,9 +31,17 @@ const LectureDetail = (props) => {
         }
     };
 
-    const EnrollBtn = () => {
+    const AdditionalBtn = () => {
         return props.user && props.user.role === 2 ? (
-            <></>
+            props.user.classes.includes(lectureId) ? (
+                <button type="button">
+                    <Link to={{ pathname: '/edit', state: { lectureId } }}>
+                        수정하기
+                    </Link>
+                </button>
+            ) : (
+                <></>
+            )
         ) : (
             <button type="button" onClick={handleApply}>
                 신청하기
@@ -94,7 +102,7 @@ const LectureDetail = (props) => {
                 <button type="button">
                     <Link to="/">뒤로가기</Link>
                 </button>
-                <EnrollBtn />
+                <AdditionalBtn />
             </div>
         </div>
     );

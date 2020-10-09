@@ -48,6 +48,35 @@ export const postNew = async (req, res) => {
   }
 };
 
+export const postEdit = async (req, res) => {
+  // 수업id를 받아와서 
+  const {
+    body: { lectureId, room, date, time, maxNum, description, scoreArr, scoreText }
+  } = req;
+  try {
+    let scoreTitle = [];
+    scoreArr.map((item, index) => {
+      if (item === 'block') {
+        scoreTitle = [...scoreTitle, scoreText[index]];
+      }
+    });
+    await Class.findByIdAndUpdate({_id:lectureId}, {
+      class_room: room,
+      start_date: date[0],
+      end_date: date[1],
+      start_time: time[0],
+      end_time: time[1],
+      std_max: maxNum,
+      description: description,
+      score_title: scoreTitle
+    });
+
+    return res.status(200).json({ editLecture: true });
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 export const postEnroll = async (req, res) => {
   const {
     user: { _id },

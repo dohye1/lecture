@@ -6,6 +6,7 @@ import LandingPage from './components/pages/LandingPage';
 import Login from './components/pages/Login';
 import Register from './components/pages/Register';
 import OpenLecture from './components/pages/OpenLecture';
+import EditLecture from './components/pages/EditLecture';
 import LectureDetail from './components/pages/LectureDetail';
 import ScorePage from './components/pages/ScorePage';
 
@@ -30,6 +31,10 @@ function App() {
                     <Route
                         path="/open"
                         component={withAuth(OpenLecture, true)}
+                    />
+                    <Route
+                        path="/edit"
+                        component={withAuth(EditLecture, true)}
                     />
                     <Route
                         path="/lecture/:id"

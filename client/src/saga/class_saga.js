@@ -13,6 +13,8 @@ import {
     NEW_CLASS_RESULT,
     ENROLL_CLASS,
     ENROLL_CLASS_RESULT,
+    EDIT_CLASS,
+    EDIT_CLASS_RESULT,
 } from '../actions/types';
 import axios from 'axios';
 
@@ -38,8 +40,31 @@ function* enrollClass(data) {
 }
 //-------------enrollClass----------------
 
-//-------------newClass----------------
+
+//-------------editClass----------------
 let lectureData;
+async function editClassAPI() {
+    return await axios
+        .post('/api/class/edit', lectureData)
+        .then((response) => response.data);
+}
+
+function* editClass({ payload }) {
+    lectureData = payload;
+    try {
+        const result = yield call(editClassAPI);
+        yield put({
+            type: EDIT_CLASS_RESULT,
+            payload: result,
+        });
+    } catch (error) {
+        console.log(error);
+    }
+}
+//-------------editClass----------------
+
+
+//-------------newClass----------------
 async function newClassAPI() {
     return await axios
         .post('/api/class/new', lectureData)
@@ -81,6 +106,7 @@ function* allClass() {
 function* watchClass() {
     yield takeEvery(ALL_CLASS, allClass);
     yield takeEvery(NEW_CLASS, newClass);
+    yield takeEvery(EDIT_CLASS, editClass);
     yield takeEvery(ENROLL_CLASS, enrollClass);
 }
 

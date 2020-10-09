@@ -1,4 +1,4 @@
-import { ALL_CLASS, ENROLL_CLASS, NEW_CLASS } from './types';
+import { ALL_CLASS, ENROLL_CLASS, NEW_CLASS,EDIT_CLASS } from './types';
 
 export const allClass = () => {
     return {
@@ -9,6 +9,13 @@ export const allClass = () => {
 export const newClass = (data) => {
     return {
         type: NEW_CLASS,
+        payload: data,
+    };
+};
+
+export const editClass = (data) => {
+    return {
+        type: EDIT_CLASS,
         payload: data,
     };
 };

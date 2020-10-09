@@ -2,6 +2,7 @@ import {
     ALL_CLASS_RESULT,
     NEW_CLASS_RESULT,
     ENROLL_CLASS_RESULT,
+    EDIT_CLASS_RESULT,
 } from '../actions/types';
 
 const classReducer = (state = {}, action) => {
@@ -14,6 +15,10 @@ const classReducer = (state = {}, action) => {
         case NEW_CLASS_RESULT:
             return {
                 newClassResult: action.payload.newLecture,
+            };
+        case EDIT_CLASS_RESULT:
+            return {
+                editClassResult: action.payload.editLecture,
             };
         case ENROLL_CLASS_RESULT:
             return {
