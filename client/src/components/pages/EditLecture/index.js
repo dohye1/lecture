@@ -66,13 +66,14 @@ const EditLecture = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-if(!Date){
-alert('강의 일정을 설정해 주세요');
-return;
-}if(!Time){
-alert('강의 시간을 설정해 주세요');
-return;
-}
+        if(!Date){
+            alert('강의 일정을 설정해 주세요');
+            return;
+        }
+        if(!Time){
+            alert('강의 시간을 설정해 주세요');
+            return;
+        }
         const lectureData = {
             lectureId:props.history.location.state.lectureId,
             room: e.target.room.value,
